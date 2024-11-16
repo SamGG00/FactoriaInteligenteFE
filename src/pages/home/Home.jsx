@@ -196,32 +196,8 @@ export default function Home() {
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={12} md={3}>
-  <Box
-    sx={{
-    /*   width: "100%",
-      height: "100%", // Asegura que el contenedor cubra el área disponible
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-     */  borderTopRightRadius: {  md: "25px" }, // Bordes redondeados ajustables
-      borderBottomRightRadius: { xs: "25px", sm: "10px", md: "25px" },
-      borderBottomLeftRadius: { xs: "25px", sm: "10px", md: "25px" },
 
-      borderRadius: {  md: "25px" }, // Bordes redondeados en pantallas pequeñas
-      overflow: "hidden", // Para asegurarse de que los bordes redondeados se apliquen correctamente
-    }}
-  >
-    <img
-      src={img1}
-      alt=""
-      style={{
-        width: "100%",
-        height: "auto", // Mantener la proporción de la imagen
-        objectFit: "cover", // Ajustar la imagen para que cubra el área
-      }}
-    />
-  </Box>
-</Grid>
+              </Grid>
             </Grid>
           </Grid>
           <Grid
