@@ -14,6 +14,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -57,7 +58,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function NavBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  const navigate = useNavigate();
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -78,6 +79,16 @@ export default function NavBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const toAbout=()=>{
+    navigate('/about');
+  }
+  const toHome=()=>{
+    navigate('/');
+  }
+  const toWeb=()=>{
+    navigate('/web');
+  }
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -95,8 +106,7 @@ export default function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Iniciar sesion</MenuItem>
     </Menu>
   );
 
@@ -118,19 +128,9 @@ export default function NavBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
+      <Button onClick={toAbout}>
         <Typography>Sobre Nosotros</Typography>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
+      </Button>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -142,7 +142,7 @@ export default function NavBar() {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p>Iniciar sesión</p>
       </MenuItem>
     </Menu>
   );
@@ -178,6 +178,7 @@ export default function NavBar() {
             }}
           >
             <Button
+            onClick={toAbout}
               variant="text"
               sx={{
                 color: "white",
@@ -204,6 +205,7 @@ export default function NavBar() {
               Sobre Nosotros
             </Button>
             <Button
+            onClick={toWeb}
               variant="text"
               sx={{
                 color: "white",
