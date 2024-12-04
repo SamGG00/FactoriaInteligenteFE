@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, Typography, Container, Box, Breadcrumbs, Link, IconButton } from '@mui/material';
 import NavBar from "/src/pages/home/components/AppBar.jsx";
 import { LinkedIn } from '@mui/icons-material';
-
+import '../../assets/css/about.css'
 export default function About() {
   const [activeTab, setActiveTab] = useState(0); // Estado para controlar las pestañas
 
