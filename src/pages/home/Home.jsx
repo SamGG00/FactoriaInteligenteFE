@@ -5,7 +5,7 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import img1 from "../../assets/images/1.jpg";
 import img2 from "../../assets/images/2.jpg";
 import img3 from "../../assets/images/3.png";
-import NavBar from "./components/appBar";
+import NavBar from "./components/AppBar";
 import Grid from "@mui/material/Grid2";
 const images = [
   { src: img1, alt: "Imagen 1" },
