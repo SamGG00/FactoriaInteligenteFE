@@ -1,118 +1,151 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Typography, Container, Box, Breadcrumbs, Link, IconButton } from '@mui/material';
-import NavBar from "/src/pages/home/components/AppBar.jsx";
+import { Card, CardContent, Typography, Container, Box, AppBar, Tabs, Tab, IconButton, Grid } from '@mui/material';
 import { LinkedIn } from '@mui/icons-material';
-import '../../assets/css/about.css'
-export default function About() {
-  const [activeTab, setActiveTab] = useState(0); // Estado para controlar las pestañas
+import { useTheme } from '@mui/material/styles';
+import NavBar from "/src/pages/home/components/AppBar.jsx";
+import '../../assets/css/about.css';
+import perfil1 from "../../assets/images/perfil1.webp";
+import perfil2 from "../../assets/images/perfil2.webp"; // Imagen para otro investigador
 
-  const handleTabChange = (tabIndex) => {
-    setActiveTab(tabIndex); // Cambia el contenido basado en la pestaña seleccionada
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+function a11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
+  };
+}
+
+const investigadorData = [
+  {
+    nombre: "Marcelo López Trujillo",
+    perfilImg: perfil1,
+    linkedin: "https://www.linkedin.com/in/marcelo-lopez-trujillo-76114125/"
+  },
+  {
+    nombre: "Alexandra Duarte",
+    perfilImg: perfil2,
+    linkedin: "https://www.linkedin.com/in/ana-rodriguez/"
+  },
+  {
+    nombre: "Carlos Eduardo Marulanda ",
+    perfilImg: perfil2,
+    linkedin: "https://co.linkedin.com/in/carlos-marulanda-2018"
+  },
+  {
+    nombre: "Santiago Murillo Rendon",
+    perfilImg: perfil2,
+    linkedin: "https://www.linkedin.com/mwlite/profile/in/samurillore?originalSubdomain=co"
+  }
+
+];
+
+export default function About() {
+  const theme = useTheme();
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue); // Cambia la pestaña activa
   };
 
   return (
     <div>
       <NavBar />
-      <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
+      <Container maxWidth="xl" sx={{ mt: 5, mb: 5 }}>
         <Card sx={{ boxShadow: 3, borderRadius: 2 }}>
           <CardContent>
-            <Breadcrumbs separator="-" aria-label="breadcrumb" sx={{ mb: 2 }}>
-              <Link
-                underline="hover"
-                color="inherit"
-                onClick={() => handleTabChange(0)}
-              >
-                Sobre Nosotros
-              </Link>
+            <Box sx={{ bgcolor: 'background.paper', width: '100%' }}>
+              <AppBar position="static">
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  indicatorColor="primary"
+                  textColor="inherit"
+                  variant="fullWidth"
+                  aria-label="full width tabs example"
+                >
+                  <Tab label="Sobre Nosotros" {...a11yProps(0)} />
+                  <Tab label="Líderes" {...a11yProps(1)} />
+                </Tabs>
+              </AppBar>
 
-              <Link
-                underline="hover"
-                color="inherit"
-                onClick={() => handleTabChange(1)}
-              >
-                Detalles
-              </Link>
-
-              <Typography sx={{ color: 'text.primary' }}>Breadcrumbs</Typography>
-            </Breadcrumbs>
-
-            {/* Contenido dinámico según la pestaña seleccionada */}
-            <div className="container">
-              <div className="tabs">
-                <input
-                  type="radio"
-                  id="radio-1"
-                  name="tabs"
-                  checked={activeTab === 0}
-                  onChange={() => handleTabChange(0)}
-                />
-                <label className="tab" htmlFor="radio-1">
-                  Sobre Nosotros
-                </label>
-
-                <input
-                  type="radio"
-                  id="radio-2"
-                  name="tabs"
-                  checked={activeTab === 1}
-                  onChange={() => handleTabChange(1)}
-                />
-                <label className="tab" htmlFor="radio-2">
-                  Detalles
-                </label>
-
-                <span className="glider"></span>
-              </div>
-            </div>
-
-            {/* Contenido de la pestaña */}
-            {activeTab === 0 && (
-              <div>
+              <TabPanel value={value} index={0} dir={theme.direction}>
                 <Typography variant="h4" component="h1" gutterBottom>
                   Sobre Nosotros
                 </Typography>
                 <Typography variant="body1" paragraph>
                   La industria 4.0 ya es una realidad mundial y nacional y tiene desafíos para integrarse al entorno de producción actual,
                   el que requiere la convergencia entre el entorno físico y el digital, lo que exige una transformación radical en la industria manufacturera.
-                  Este desafío de transformación no solo impacta en los procedimientos operativos, sino también en las personas y en la nueva
-                  forma de trabajar en un mundo donde los datos se han convertido en la materia prima principal, en lugar de los materiales
-                  tradicionales utilizados en la fabricación de productos. En Colombia, según estudios revisados, la presencia de la Industria
-                  4.0 está en proceso de crecimiento y en el sector de alimentos es incipiente, lo que hace relevante adoptar las innovaciones
-                  tecnológicas, detallando las herramientas disponibles.
+                  Este desafío de transformación no solo impacta en los procedimientos operativos, sino también en las personas y en la nueva forma de trabajar
+                  en un mundo donde los datos se han convertido en la materia prima principal, en lugar de los materiales tradicionales utilizados en la fabricación de productos.
+                  En Colombia, según estudios revisados, la presencia de la Industria 4.0 está en proceso de crecimiento y en el sector de alimentos es incipiente,
+                  lo que hace relevante adoptar las innovaciones tecnológicas, detallando las herramientas disponibles.
+                  Para el efecto, desde un tipo de investigación cualitativa, a través de un estudio descriptivo, exploratorio, explicativo y correlacional,
+                  se definirán estrategias para la fábrica inteligente en las empresas medianas del sector de alimentos del Departamento de Caldas Colombia y
+                  se desarrollará una aplicación de software que permita dar inicio a un observatorio institucional del tema.
                 </Typography>
-              </div>
-            )}
+              </TabPanel>
 
-            {activeTab === 1 && (
-              <div>
-                <Typography variant="h6" gutterBottom>
-                  Detalles y Seguimiento
-                </Typography>
-                <Box display="flex" alignItems="center" mb={2}>
-                  <img
-                    src="https://via.placeholder.com/80"
-                    alt="Imagen"
-                    style={{ marginRight: 16, borderRadius: 8 }}
-                  />
-                  <Typography variant="body2">
-                    Aquí puedes agregar información adicional como imágenes o detalles específicos.
-                  </Typography>
-                </Box>
+              <TabPanel value={value} index={1} dir={theme.direction}>
+                <Grid container spacing={2}>
+                  {investigadorData.map((investigador, index) => (
+                    <Grid item xs={12} sm={6} md={6} key={index}>
+                      <Card sx={{ boxShadow: 3, borderRadius: 2 }}>
+                        <CardContent>
+                          <Box display="flex" alignItems="center" justifyContent="space-between">
+                            <Typography variant="h6" gutterBottom>
+                              {investigador.nombre}
+                            </Typography>
+                            <IconButton
+                              color="primary"
+                              component="a"
+                              href={investigador.linkedin}
+                              target="_blank"
+                            >
+                              <LinkedIn />
+                            </IconButton>
+                          </Box>
 
-                <Typography variant="body2" mb={2}>
-                  También puedes seguirnos en LinkedIn para estar al tanto de las últimas actualizaciones.
-                </Typography>
-
-                <IconButton
-                  color="primary"
-                  component="a"
-                  href="https://www.linkedin.com"
-                  target="_blank"
-                >
-                  <LinkedIn />
-                </IconButton>
-              </div>
-            )}
+                          <Box display="flex" alignItems="center" mb={2}>
+                            <img
+                              src={investigador.perfilImg}
+                              alt={investigador.nombre}
+                              style={{
+                                width: "50px",
+                                height: "50px",
+                                borderRadius: "50%",
+                                marginRight: 16
+                              }}
+                            />
+                            <Typography variant="body2">
+                              Información adicional sobre {investigador.nombre}.
+                            </Typography>
+                          </Box>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                  ))}
+                </Grid>
+              </TabPanel>
+            </Box>
           </CardContent>
         </Card>
       </Container>
