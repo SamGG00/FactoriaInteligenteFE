@@ -166,7 +166,7 @@ export default function Home() {
         }}
       >
         <Grid container spacing={2}>
-          <Grid
+        <Grid
             item
             size={{ xs: 12, md: 6, sm: 12 }}
             sx={{ backgroundColor: "#1234", borderRadius: "25px" }}
@@ -195,33 +195,20 @@ export default function Home() {
                   quibusdam.
                 </Typography>
               </Grid>
-              <Grid item xs={12} sm={12} md={3}>
-  <Box
-    sx={{
-    /*   width: "100%",
-      height: "100%", // Asegura que el contenedor cubra el área disponible
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-     */  borderTopRightRadius: {  md: "25px" }, // Bordes redondeados ajustables
-      borderBottomRightRadius: { xs: "25px", sm: "10px", md: "25px" },
-      borderBottomLeftRadius: { xs: "25px", sm: "10px", md: "25px" },
-
-      borderRadius: {  md: "25px" }, // Bordes redondeados en pantallas pequeñas
-      overflow: "hidden", // Para asegurarse de que los bordes redondeados se apliquen correctamente
-    }}
-  >
-    <img
-      src={img1}
-      alt=""
-      style={{
-        width: "100%",
-        height: "auto", // Mantener la proporción de la imagen
-        objectFit: "cover", // Ajustar la imagen para que cubra el área
-      }}
-    />
-  </Box>
-</Grid>
+              <Grid item size={{ xs: 12, md: 3, sm: 12 }}>
+                <img
+                  src={img1}
+                  alt=""
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover", // Puedes usar 'cover' o 'contain' dependiendo del efecto que desees
+                    borderTopRightRadius: "25px", // Solo en el borde superior derecho
+                    borderBottomRightRadius: "25px", // Solo en el borde inferior derecho
+                    margin: "0", // Eliminar márgenes
+                  }}
+                />
+              </Grid>
             </Grid>
           </Grid>
           <Grid
