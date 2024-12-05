@@ -22,7 +22,6 @@ import {
 import { visuallyHidden } from "@mui/utils";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-
 import CircularProgress from "@mui/material/CircularProgress";
 const headCells = [
   { id: "nombre_del_articulo", numeric: false, disablePadding: false, label: "Nombre del articulo" },
@@ -48,11 +47,8 @@ function getComparator(order, orderBy) {
 
 function EnhancedTableHead(props) {
   const {
-    onSelectAllClick,
     order,
     orderBy,
-    numSelected,
-    rowCount,
     onRequestSort,
   } = props;
 
@@ -63,22 +59,13 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          {/*  <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all desserts' }}
-          /> */}
-        </TableCell>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
             align="right"
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
-            sx={{ textAlign: "center" }}
+            sx={{ textAlign: "center", fontWeight:"600" }}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
@@ -109,14 +96,12 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-  const { numSelected, selected, codSelec } = props;
+  const { numSelected } = props;
 
   if (numSelected == 0) {
     return null;
   }
-  const handleDownload = async () => {
-   
-  };
+ 
 
   return (
     <Toolbar
@@ -195,7 +180,7 @@ export default function EnhancedTable({ rows }) {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(parseInt(event.target.value, 5));
     setPage(0);
   };
 
@@ -247,47 +232,38 @@ export default function EnhancedTable({ rows }) {
                     selected={isItemSelected}
                     sx={{ cursor: "pointer" }}
                   >
-                    <TableCell padding="checkbox">
+                   {/*  <TableCell padding="checkbox">
                       <Checkbox
                         color="primary"
                         checked={isItemSelected}
                         inputProps={{ "aria-labelledby": labelId }}
                       />
-                    </TableCell>
-                   {/*  <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="none"
-                      align="center"
-                    >
-                      {row.id_articulo}
                     </TableCell> */}
                     <TableCell align="center" component="th">
                       {row.titulo}
                     </TableCell>
                     <TableCell align="center" component="th">
-                      {row.autor}
+                      {row.primer_nombre} {row.primer_apellido}
                     </TableCell>
                     <TableCell align="center">
-                      {row.publicado}
+                      {row.publicado==1? "Sí":"No"}
                     </TableCell>
                     <TableCell align="center">
-                      {row.fecha_actualizado}
+                      {row.fecha_actualizado? row.fecha_actualizado.replace("T05:00:00.000Z", ""): "Sin actualizaciones"}
                     </TableCell>
                     <TableCell align="center">
-                      {row.fecha_publicado}
+                      {row.fecha_publicado? row.fecha_publicado.replace("T05:00:00.000Z", ""):""}
                     </TableCell>
 
                     <TableCell align="center">
                     <Tooltip title="Eliminar articulo" placement="top">
                     <IconButton aria-label="delete">
-                      <DeleteIcon  sx={{ color: "red" }} />
+                      <DeleteIcon  sx={{ color: "#c93401" }} />
                     </IconButton>
                     </Tooltip>
                     <Tooltip title="Editar articulo" placement="top">
                     <IconButton aria-label="delete">
-                      <EditIcon />
+                      <EditIcon  sx={{ color: "#076633" }} />
                     </IconButton>
                     </Tooltip>
                     </TableCell>
@@ -303,15 +279,15 @@ export default function EnhancedTable({ rows }) {
             </TableBody>
           </Table>
         </TableContainer>
-        {/*   <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          <TablePagination
+          rowsPerPageOptions={[5]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
-        /> */}
+        /> 
       </Paper>
     </Box>
   );

@@ -23,7 +23,7 @@ const getArticles= async(page=1)=>{
   const link = url+page
   console.log(link)
  const response= await axios.get(link)
- console.log(response.data)
+ console.log("response",response.data)
 
  if (response.data.status){
   setArticles(response.data.articles)
@@ -31,17 +31,15 @@ const getArticles= async(page=1)=>{
 
  }
 }
-
-
   return (
     <div>
     <NavBar />
       <div className="container">
        <Grid container spacing={2}>
-        <Grid  xs={12}>
-          <h2>Manage Page</h2>
+        <Grid  size={{ xs: 12, md: 12, sm: 12 }} sx={{mt:5}}>
+          <h2>Listado de artículos</h2>
           </Grid>
-          <Grid xs={12}>
+          <Grid size={{ xs: 12, md: 12, sm: 12 }} >
   {!loading && (
     <EnhancedTable rows={articles} />
   )}
