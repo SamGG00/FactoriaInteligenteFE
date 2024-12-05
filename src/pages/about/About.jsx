@@ -37,17 +37,17 @@ function a11yProps(index) {
 const investigadorData = [
   {
     nombre: "Marcelo López Trujillo",
-    perfilImg: perfil1,
+    perfilImg: "https://media.licdn.com/dms/image/v2/C4E03AQEKcWQFU15LdA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1548725555869?e=1738800000&v=beta&t=2hZvzKF64h1Nuh3waUmhsOQ7f8pJdDXJQIS8CEVD0LQ",
     linkedin: "https://www.linkedin.com/in/marcelo-lopez-trujillo-76114125/"
   },
   {
     nombre: "Alexandra Eugenia Duarte ",
-    perfilImg: perfil2,
+    perfilImg: "https://media.licdn.com/dms/image/v2/D4E03AQEHwSrAvrMnhg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1724078772464?e=1738800000&v=beta&t=SdUX8ohIwaOt9fLqrLPk64oxqkqw5jZysqWbRPfV56w",
     linkedin: "https://www.linkedin.com/in/ana-rodriguez/"
   },
   {
     nombre: "Carlos Eduardo Marulanda ",
-    perfilImg: perfil2,
+    perfilImg: "https://media.licdn.com/dms/image/v2/C5603AQGsTuRXri0yKw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1532127732301?e=1738800000&v=beta&t=-W2eqL_jI6pRahwWwdBM_qStLbSObkZZV8xNsFXSxso",
     linkedin: "https://co.linkedin.com/in/carlos-marulanda-2018"
   },
   {
@@ -58,7 +58,7 @@ const investigadorData = [
   {
     nombre: "Marco Fidel Suárez",
     perfilImg: perfil2,
-    linkedin: "www.linkedin.com/in/marco-suarez-918a94338"
+    linkedin: "https://www.linkedin.com/in/marco-suarez-918a94338"
   }
 
 ];
