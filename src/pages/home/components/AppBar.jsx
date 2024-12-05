@@ -8,7 +8,8 @@ import { Button, Typography } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
+import Stack from '@mui/material/Stack';
+import SvgIcon from '@mui/material/SvgIcon';
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
@@ -39,6 +40,13 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 
+function HomeIcon(props) {
+  return (
+    <SvgIcon {...props}>
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+    </SvgIcon>
+  );
+}
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
@@ -77,13 +85,13 @@ export default function NavBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const toAbout=()=>{
+  const toAbout = () => {
     navigate('/about');
   }
-  const toHome=()=>{
+  const toHome = () => {
     navigate('/');
   }
-  const toWeb=()=>{
+  const toWeb = () => {
     navigate('/web');
   }
 
@@ -126,9 +134,9 @@ export default function NavBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-      <Button onClick={toAbout}>
-        <Typography>Sobre Nosotros</Typography>
-      </Button>
+        <Button onClick={toAbout}>
+          <Typography>Sobre Nosotros</Typography>
+        </Button>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -150,13 +158,14 @@ export default function NavBar() {
       <AppBar position="static" sx={{ backgroundColor: "#29ABE2" }}>
         <Toolbar>
           <IconButton
+           onClick={toHome}
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <HomeIcon />
           </IconButton>
 
           <Search>
@@ -172,11 +181,11 @@ export default function NavBar() {
           <Box
             sx={{
               display: { xs: "none", md: "flex" },
-              gap:2
+              gap: 2
             }}
           >
             <Button
-            onClick={toAbout}
+              onClick={toAbout}
               variant="text"
               sx={{
                 color: "white",
@@ -203,7 +212,7 @@ export default function NavBar() {
               Sobre Nosotros
             </Button>
             <Button
-            onClick={toWeb}
+              onClick={toWeb}
               variant="text"
               sx={{
                 color: "white",
@@ -227,12 +236,12 @@ export default function NavBar() {
                 },
               }}
             >
-             ¿Industria 4.0? 
+              ¿Industria 4.0?
             </Button>
 
-         <Button variant="outlined" sx={{color:'white',textTransform:'none',borderColor:'white'}}>
-            Iniciar Sesión
-         </Button>
+            <Button variant="outlined" sx={{ color: 'white', textTransform: 'none', borderColor: 'white' }}>
+              Iniciar Sesión
+            </Button>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
