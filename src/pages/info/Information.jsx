@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Typography, Container, Box, Paper } from '@mui/material';
+import { Card, CardContent, Typography, Container, Box, Paper, Divider } from '@mui/material';
 import NavBar from "/src/pages/home/components/AppBar.jsx";
 
 export default function Informacion() {
@@ -11,9 +11,15 @@ export default function Informacion() {
         <Paper elevation={3} sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
           <Card sx={{ boxShadow: 0, borderRadius: 2, flex: 1 }}>
             <CardContent sx={{ p: 5 }}>
+              {/* Título */}
               <Typography variant="h3" component="h1" gutterBottom sx={{ fontWeight: 'bold', color: 'primary.main' }}>
                 Industria 4.0: Transformando el Futuro de la Producción
               </Typography>
+              
+              {/* Línea sutil */}
+              <Divider sx={{ borderColor: 'rgba(0, 0, 0, 1)', marginBottom: 3 }} />
+
+              {/* Contenido */}
               <Typography variant="body1" paragraph>
                 La Industria 4.0 se refiere a la cuarta revolución industrial, un cambio global que combina la automatización de procesos, el uso de tecnologías avanzadas y la interconexión digital en tiempo real. Este fenómeno está transformando la manufactura y otras industrias a través de la integración de nuevas tecnologías como la inteligencia artificial (IA), el Internet de las Cosas (IoT), la robótica avanzada, la realidad aumentada (AR) y la impresión 3D, entre otras.
               </Typography>
