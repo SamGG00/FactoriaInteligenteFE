@@ -13,6 +13,7 @@ import SvgIcon from '@mui/material/SvgIcon';
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import Logo from "../../../assets/images/Logo Verde.png";
 import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
@@ -43,7 +44,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 function HomeIcon(props) {
   return (
     <SvgIcon {...props}>
-      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+      <path href="../../../assets/images/Logo Verde.png" />
     </SvgIcon>
   );
 }
@@ -165,7 +166,14 @@ export default function NavBar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <HomeIcon />
+            <img
+              src={Logo}
+              alt="Home"
+              style={{
+                height: "40px", // Altura del logo
+                width: "auto", // Mantener proporciones
+              }}
+            />
           </IconButton>
 
           <Search>
