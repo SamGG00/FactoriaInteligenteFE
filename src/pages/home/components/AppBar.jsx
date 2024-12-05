@@ -85,8 +85,8 @@ export default function NavBar() {
   const toHome = () => {
     navigate('/');
   }
-  const toWeb = () => {
-    navigate('/web');
+  const toInfo = () => {
+    navigate('/information');
   }
 
   const menuId = "primary-search-account-menu";
@@ -213,7 +213,7 @@ export default function NavBar() {
               Sobre Nosotros
             </Button>
             <Button
-              onClick={toWeb}
+              onClick={toInfo}
               variant="text"
               sx={{
                 color: "white",
