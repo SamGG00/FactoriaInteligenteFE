@@ -41,13 +41,6 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 
-function HomeIcon(props) {
-  return (
-    <SvgIcon {...props}>
-      <path href="../../../assets/images/Logo Verde.png" />
-    </SvgIcon>
-  );
-}
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
