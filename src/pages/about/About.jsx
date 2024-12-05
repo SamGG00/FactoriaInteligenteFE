@@ -41,7 +41,7 @@ const investigadorData = [
     linkedin: "https://www.linkedin.com/in/marcelo-lopez-trujillo-76114125/"
   },
   {
-    nombre: "Alexandra Duarte",
+    nombre: "Alexandra Eugenia Duarte ",
     perfilImg: perfil2,
     linkedin: "https://www.linkedin.com/in/ana-rodriguez/"
   },
@@ -54,6 +54,11 @@ const investigadorData = [
     nombre: "Santiago Murillo Rendon",
     perfilImg: perfil2,
     linkedin: "https://www.linkedin.com/mwlite/profile/in/samurillore?originalSubdomain=co"
+  },
+  {
+    nombre: "Marco Fidel Suárez",
+    perfilImg: perfil2,
+    linkedin: "www.linkedin.com/in/marco-suarez-918a94338"
   }
 
 ];
@@ -105,9 +110,9 @@ export default function About() {
               </TabPanel>
 
               <TabPanel value={value} index={1} dir={theme.direction}>
-                <Grid container spacing={2}>
+                <Grid container spacing={3} justifyContent="center">
                   {investigadorData.map((investigador, index) => (
-                    <Grid item xs={12} sm={6} md={6} key={index}>
+                    <Grid item xs={8} sm={"auto"} md={"auto"} key={index}>
                       <Card sx={{ boxShadow: 3, borderRadius: 2 }}>
                         <CardContent>
                           <Box display="flex" alignItems="center" justifyContent="space-between">
