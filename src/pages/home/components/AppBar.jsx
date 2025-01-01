@@ -42,7 +42,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
+  color: "#F9F9F9",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0), // Ajuste de padding superior e inferior
     paddingLeft: theme.spacing(2), // Espacio inicial para el texto (placeholder)
@@ -138,7 +138,7 @@ export default function NavBar() {
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
+          color="#2E8B57"
         >
           <AccountCircle />
         </IconButton>
@@ -149,13 +149,13 @@ export default function NavBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: "#29ABE2" }}>
+      <AppBar position="static" sx={{ backgroundColor: "#8FD5A6" }}>
         <Toolbar>
           <IconButton
            onClick={toHome}
             size="large"
             edge="start"
-            color="inherit"
+            color="#8FD5A6"
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
@@ -200,7 +200,7 @@ export default function NavBar() {
                   bottom: 0,
                   width: "100%",
                   height: "2px", // Grosor del subrayado
-                  backgroundColor: "white",
+                  backgroundColor: "#2E8B57",
                   transform: "scaleX(0)", // Oculto inicialmente
                   transformOrigin: "left",
                   transition: "transform 0.3s ease-in-out", // Animación suave
@@ -227,7 +227,7 @@ export default function NavBar() {
                   bottom: 0,
                   width: "100%",
                   height: "2px", // Grosor del subrayado
-                  backgroundColor: "white",
+                  backgroundColor: "#2E8B57",
                   transform: "scaleX(0)", // Oculto inicialmente
                   transformOrigin: "left",
                   transition: "transform 0.3s ease-in-out", // Animación suave
