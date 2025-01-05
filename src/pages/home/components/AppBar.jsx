@@ -25,7 +25,7 @@ const Search = styled("div")(({ theme, open }) => ({
   marginRight: theme.spacing(2),
   marginLeft: 0,
   transition: "width 0.3s ease-in-out",
-  width: open ? 200 : 40, // Ajusta el ancho según necesites
+  width: open ? 200 : 0, 
   cursor: "pointer",
 
   "&:hover": {
