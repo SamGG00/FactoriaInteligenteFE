@@ -25,7 +25,7 @@ const Search = styled("div")(({ theme, open }) => ({
   marginRight: theme.spacing(2),
   marginLeft: 0,
   transition: "width 0.3s ease-in-out",
-  width: open ? 200 : 0, 
+  width: open ? 200 : 0,
   cursor: "pointer",
 
   "&:hover": {
@@ -158,7 +158,14 @@ export default function NavBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: "#8FD5A6" }}>
+      <AppBar
+        position="sticky"
+        sx={{
+          top: 0,
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          backgroundColor: "#8FD5A6",
+        }}
+      >
         <Toolbar>
           <IconButton
             onClick={toHome}
