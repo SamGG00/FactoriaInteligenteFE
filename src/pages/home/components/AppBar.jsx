@@ -16,19 +16,24 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Logo from "../../../assets/images/Logo Verde.png";
 import { useNavigate } from "react-router-dom";
 
-const Search = styled("div")(({ theme }) => ({
+const Search = styled("div")(({ theme, open }) => ({
+  display: "flex",
+  alignItems: "center",
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  transition: "width 0.3s ease-in-out",
+  width: open ? 200 : 40, // Ajusta el ancho según necesites
+  cursor: "pointer",
+
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
+
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
-    width: "auto",
   },
 }));
 
@@ -57,11 +62,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function NavBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const navigate = useNavigate();
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const handleIconClick = () => {
+    setOpen((prev) => !prev);
+  };
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -152,7 +161,7 @@ export default function NavBar() {
       <AppBar position="static" sx={{ backgroundColor: "#8FD5A6" }}>
         <Toolbar>
           <IconButton
-           onClick={toHome}
+            onClick={toHome}
             size="large"
             edge="start"
             color="#8FD5A6"
@@ -163,20 +172,23 @@ export default function NavBar() {
               src={Logo}
               alt="Home"
               style={{
-                height: "40px", // Altura del logo
+                height: "60px", // Altura del logo
                 width: "auto", // Mantener proporciones
               }}
             />
           </IconButton>
 
-          <Search>
-            <SearchIconWrapper>
+          <Search open={open}>
+            <IconButton onClick={handleIconClick}>
               <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Buscar..."
-              inputProps={{ "aria-label": "search" }}
-            />
+            </IconButton>
+            {open && (
+              <InputBase
+                placeholder="Buscar…"
+                sx={{ ml: 1, flex: 1, color: "inherit" }}
+                inputProps={{ "aria-label": "search" }}
+              />
+            )}
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box
