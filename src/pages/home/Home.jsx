@@ -35,6 +35,8 @@ export default function Home() {
 
   return (
     <div>
+      <Box
+      sx={{backgroundColor:"#ecfae8"}}>
       <NavBar />
       <Box
         sx={{
@@ -86,7 +88,7 @@ export default function Home() {
               position: "absolute",
               bottom: 20,
               left: 10,
-              color: "#e9f5e6",
+              color: "#e5ffde",
               backgroundColor: "rgba(0, 0, 0, 0.5)",
               padding: "5px 10px",
               borderRadius: "5px",
@@ -116,7 +118,7 @@ export default function Home() {
                   borderRadius: "50%",
                   backgroundColor:
                     currentIndex === index
-                      ? "#e9f5e6"
+                      ? "#e5ffde"
                       : "#deffd6",
                   cursor: "pointer",
                   transition: "background-color 0.3s",
@@ -136,7 +138,7 @@ export default function Home() {
             transform: "translateY(-50%)",
             backgroundColor: "rgba(0, 0, 0, 0.5)",
             borderRadius: "20px",
-            color: "#e9f5e6",
+            color: "#e5ffde",
             "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.7)" },
           }}
         >
@@ -150,7 +152,7 @@ export default function Home() {
             borderRadius: "20px",
             top: "50%",
             transform: "translateY(-50%)",
-            color: "#e9f5e6",
+            color: "#e5ffde",
             "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.7)" },
           }}
         >
@@ -159,9 +161,11 @@ export default function Home() {
       </Box>
       <Box
         sx={{
-          maxWidth: "90%",
+          maxWidth: "100%",
           margin: "auto",
           marginTop: "2%",
+          marginLeft: "5%",
+          marginRight: "5%",
           textAlign: "center",
           position: "relative",
         }}
@@ -170,7 +174,11 @@ export default function Home() {
         <Grid
             item
             size={{ xs: 12, md: 6, sm: 12 }}
-            sx={{ backgroundColor: "#e9f5e6", borderRadius: "25px" }}
+            sx={{ backgroundColor: "#e5ffde", borderRadius: "25px", 
+              border:0.3,
+              borderColor:"#c8fab9",
+              
+            }}
           >
             <Grid container>
               <Grid item size={{ xs: 12, md: 9, sm: 12 }} sx={{}}>
@@ -215,7 +223,9 @@ export default function Home() {
           <Grid
             item
             size={{ xs: 12, md: 6, sm: 12 }}
-            sx={{ backgroundColor: "#e9f5e6", borderRadius: "25px" }}
+            sx={{ backgroundColor: "#e5ffde", borderRadius: "25px", 
+              border:0.3,
+              borderColor:"#c8fab9" }}
           >
             <Grid container>
               <Grid item size={{ xs: 12, md: 9, sm: 12 }} sx={{}}>
@@ -260,7 +270,9 @@ export default function Home() {
           <Grid
             item
             size={{ xs: 12, md: 6, sm: 12 }}
-            sx={{ backgroundColor: "#e9f5e6", borderRadius: "25px" }}
+            sx={{ backgroundColor: "#e5ffde", borderRadius: "25px", 
+              border:0.3,
+              borderColor:"#c8fab9" }}
           >
             <Grid container>
               <Grid item size={{ xs: 12, md: 9, sm: 12 }} sx={{}}>
@@ -305,7 +317,9 @@ export default function Home() {
           <Grid
             item
             size={{ xs: 12, md: 6, sm: 12 }}
-            sx={{ backgroundColor: "#e9f5e6", borderRadius: "25px" }}
+            sx={{ backgroundColor: "#e5ffde", borderRadius: "25px", 
+              border:0.3,
+              borderColor:"#c8fab9" }}
           >
             <Grid container>
               <Grid item size={{ xs: 12, md: 9, sm: 12 }} sx={{}}>
@@ -350,7 +364,9 @@ export default function Home() {
           <Grid
             item
             size={{ xs: 12, md: 6, sm: 12 }}
-            sx={{ backgroundColor: "#e9f5e6", borderRadius: "25px" }}
+            sx={{ backgroundColor: "#e5ffde", borderRadius: "25px", 
+              border:0.3,
+              borderColor:"#c8fab9" }}
           >
             <Grid container>
               <Grid item size={{ xs: 12, md: 9, sm: 12 }} sx={{}}>
@@ -395,7 +411,9 @@ export default function Home() {
           <Grid
             item
             size={{ xs: 12, md: 6, sm: 12 }}
-            sx={{ backgroundColor: "#e9f5e6", borderRadius: "25px" }}
+            sx={{ backgroundColor: "#e5ffde", borderRadius: "25px", 
+              border:0.3,
+              borderColor:"#c8fab9" }}
           >
             <Grid container>
               <Grid item size={{ xs: 12, md: 9, sm: 12 }} sx={{}}>
@@ -441,6 +459,7 @@ export default function Home() {
         
       </Box>
       <Footer/>
+      </Box>
     </div>
   );
 }
