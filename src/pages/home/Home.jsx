@@ -6,6 +6,7 @@ import img1 from "../../assets/images/1.jpg";
 import img2 from "../../assets/images/2.jpg";
 import img3 from "../../assets/images/3.png";
 import NavBar from "./components/AppBar";
+import Footer from "./components/Footer"
 import Grid from "@mui/material/Grid2";
 const images = [
   { src: img1, alt: "Imagen 1" },
@@ -391,8 +392,55 @@ export default function Home() {
               </Grid>
             </Grid>
           </Grid>
+          <Grid
+            item
+            size={{ xs: 12, md: 6, sm: 12 }}
+            sx={{ backgroundColor: "#1234", borderRadius: "25px" }}
+          >
+            <Grid container>
+              <Grid item size={{ xs: 12, md: 9, sm: 12 }} sx={{}}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    textAlign: "start",
+                    margin: "3% 0 1% 3%",
+                    fontWeight: 600,
+                  }}
+                >
+                  Titulo Articulo
+                </Typography>
+                <Typography
+                  variant="body2"
+                  gutterBottom
+                  sx={{ textAlign: "start", margin: "3%" }}
+                >
+                  body2. Lorem ipsum dolor sit amet, consectetur adipisicing
+                  elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum
+                  inventore consectetur, neque doloribus, cupiditate numquam
+                  dignissimos laborum fugiat deleniti? Eum quasi quidem
+                  quibusdam.
+                </Typography>
+              </Grid>
+              <Grid item size={{ xs: 12, md: 3, sm: 12 }}>
+                <img
+                  src={img1}
+                  alt=""
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover", // Puedes usar 'cover' o 'contain' dependiendo del efecto que desees
+                    borderTopRightRadius: "25px", // Solo en el borde superior derecho
+                    borderBottomRightRadius: "25px", // Solo en el borde inferior derecho
+                    margin: "0", // Eliminar márgenes
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
+        
       </Box>
+      <Footer/>
     </div>
   );
 }
