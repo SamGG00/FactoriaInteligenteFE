@@ -40,7 +40,7 @@ export default function Home() {
       <NavBar />
       <Box
         sx={{
-          maxWidth: "90%",
+          maxWidth: "100%",
           margin: "auto",
           marginTop: "2%",
           textAlign: "center",
@@ -54,7 +54,6 @@ export default function Home() {
             height: 500,
             overflow: "hidden",
             position: "relative",
-            borderRadius: "25px",
           }}
         >
           {/* Contenedor de las imágenes en fila horizontal */}
@@ -89,9 +88,8 @@ export default function Home() {
               bottom: 20,
               left: 10,
               color: "#e5ffde",
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              backgroundColor: "rgba(76, 95, 78, 0.5)",
               padding: "5px 10px",
-              borderRadius: "5px",
             }}
           >
             {images[currentIndex].alt}
@@ -115,7 +113,6 @@ export default function Home() {
                 sx={{
                   width: 12,
                   height: 12,
-                  borderRadius: "50%",
                   backgroundColor:
                     currentIndex === index
                       ? "#e5ffde"
@@ -136,7 +133,6 @@ export default function Home() {
             left: 10,
             top: "50%",
             transform: "translateY(-50%)",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
             borderRadius: "20px",
             color: "#e5ffde",
             "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.7)" },
