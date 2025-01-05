@@ -42,7 +42,7 @@ export default function Home() {
         sx={{
           maxWidth: "100%",
           margin: "auto",
-          marginTop: "2%",
+          marginTop: "1%",
           textAlign: "center",
           position: "relative",
         }}
