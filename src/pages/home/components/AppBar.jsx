@@ -97,6 +97,9 @@ export default function NavBar() {
   const toInfo = () => {
     navigate('/information');
   }
+  const toLogin = () =>{
+    navigate('/login')
+  }
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -164,7 +167,7 @@ export default function NavBar() {
           top: 0,
           zIndex: (theme) => theme.zIndex.drawer + 1,
           backgroundColor: "#8FD5A6",
-          
+
         }}
       >
         <Toolbar>
@@ -287,7 +290,7 @@ export default function NavBar() {
               ¿Industria 4.0?
             </Button>
 
-            <Button variant="outlined" sx={{ color: 'white', textTransform: 'none', borderColor: 'white' }}>
+            <Button onClick={toLogin} variant="outlined" sx={{ color: 'white', textTransform: 'none', borderColor: 'white' }}>
               Iniciar Sesión
             </Button>
           </Box>
