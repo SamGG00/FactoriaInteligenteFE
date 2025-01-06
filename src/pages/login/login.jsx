@@ -17,7 +17,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 // import { UserContext } from "../../context/userContext";
-// import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/Logo Verde.png";
 
 const SignInContainer = styled(Stack)(({ theme }) => ({
   minHeight: "100vh", // Ocupa toda la ventana
@@ -137,13 +137,11 @@ export default function Login() {
   return (
     <SignInContainer>
       <StyledCard>
-        {/* Si tienes un logo, puedes descomentar e incluir aquí */}
-        {/* 
+         
         <Box display="flex" justifyContent="center">
-          <img src={logo} alt="Logo" style={{ width: "50%", height: "auto" }} />
+          <img src={logo} alt="Logo" style={{ width: "35%", height: "auto" }} />
         </Box>
-        */}
-
+        
         <Box
           component="form"
           onSubmit={handleSubmit}
@@ -236,11 +234,11 @@ export default function Login() {
             variant="contained"
             sx={{
               mt: 2,
-              background: "radial-gradient(#008FD5, #4AB8EC)",
+              background: "radial-gradient(#cff5c4,#2E8B57)",
               color: "white",
               fontWeight: "bold",
               "&:hover": {
-                background: "radial-gradient(#006FB0, #449FD1)",
+                background: "radial-gradient(#cff5c4, #2E8B57)",
               },
             }}
             disabled={!captchaValue || !password || !user}
