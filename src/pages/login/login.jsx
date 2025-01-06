@@ -1,43 +1,44 @@
-import { useEffect, useState,useContext} from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import FormControl from "@mui/material/FormControl";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import Stack from "@mui/material/Stack";
-import MuiCard from "@mui/material/Card";
+import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  IconButton,
+  Typography,
+  FormControl,
+  OutlinedInput,
+  Stack,
+  Card as MuiCard,
+  InputAdornment,
+  InputLabel
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import InputAdornment from "@mui/material/InputAdornment";
-import InputLabel from "@mui/material/InputLabel";
-import { useNavigate } from "react-router-dom";
-/* import logo from "../../assets/images/logo.png" */
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import ReCAPTCHA from "react-google-recaptcha";
-/* import { UserContext } from "../../context/userContext"; */
-import axios from "axios"
-
-const Card = styled(MuiCard)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  alignSelf: "center",
-  width: "100%",
-  backgroundColor: "rgba(255, 255, 255, 0.65)",
-  padding: theme.spacing(4),
-  gap: theme.spacing(2),
-  margin: "auto",
-  [theme.breakpoints.up("sm")]: {
-    maxWidth: "450px",
-  },
-  boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;",
-}));
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+// import { UserContext } from "../../context/userContext";
+// import logo from "../../assets/images/logo.png";
 
 const SignInContainer = styled(Stack)(({ theme }) => ({
-  height: "100vh",
-  padding: 20,
-  backgroundImage:
-    "radial-gradient(ellipse at 50% 50%, hsl(226 97% 90%), hsl(226, 5%, 100%))",
-  backgroundRepeat: "no-repeat",
+  minHeight: "100vh", // Ocupa toda la ventana
+  alignItems: "center",
+  justifyContent: "center",
+  padding: theme.spacing(2),
+  // Fondo con gradiente
+  background:
+    "radial-gradient(ellipse at 50% 50%, hsl(226, 97%, 90%), hsl(226, 5%, 100%)) no-repeat center center",
+  backgroundSize: "cover",
+}));
+
+const StyledCard = styled(MuiCard)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  backgroundColor: "#ebf5e9", // Semitransparente
+  width: "100%",
+  maxWidth: 400, // Ancho máximo para pantallas grandes
+  padding: theme.spacing(4),
+  gap: theme.spacing(2),
+  boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
 }));
 
 export default function Login() {
@@ -49,17 +50,21 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [captchaValue, setCaptchaValue] = useState(null);
 
+  // URL de ejemplo; ajusta según tu backend
   const url = "http://localhost:3000/auth/login/";
   const nav = useNavigate();
- /*  const {
+
+  // Si usas Context para manejar usuario, descomenta e importa tu contexto
+  /*
+  const {
     setIdUser,
     setUser,
     setAccessToken,
     setRefreshToken,
     setIsad,
     setPsst
-    
-  } = useContext(UserContext); */
+  } = useContext(UserContext);
+  */
 
   const authorization = async () => {
     const data = {
@@ -69,22 +74,23 @@ export default function Login() {
     try {
       const response = await axios.post(url, data);
       const dataResponse = response.data;
-      console.log(dataResponse)
       if (dataResponse.status) {
-        setIdUser(dataResponse.data.iduser)
-        setUser(dataResponse.data.user)
-        setAccessToken(dataResponse.accessToken)
-        setRefreshToken(dataResponse.refreshToken)
-        setIsad(dataResponse.data.isad? 1:null)
-        setPsst(dataResponse.data.passwordChanged? 1:0)
-        nav("/dashboard")
+        // Descomenta si usas tu contexto de usuario
+        /*
+        setIdUser(dataResponse.data.iduser);
+        setUser(dataResponse.data.user);
+        setAccessToken(dataResponse.accessToken);
+        setRefreshToken(dataResponse.refreshToken);
+        setIsad(dataResponse.data.isad ? 1 : null);
+        setPsst(dataResponse.data.passwordChanged ? 1 : 0);
+        */
+        nav("/dashboard");
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        setError('Credenciales incorrectas. Por favor intenta de nuevo.'); // Mensaje de error específico
+        setError("Credenciales incorrectas. Por favor intenta de nuevo.");
       } else {
-        console.log(error)
-        setError('Ocurrió un error. Por favor intenta más tarde.'); // Mensaje de error general
+        setError("Ocurrió un error. Por favor intenta más tarde.");
       }
     }
   };
@@ -101,25 +107,24 @@ export default function Login() {
 
   const validateInputs = () => {
     const userRegex = /^[a-zA-Z0-9._%+-]+$/;
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&+/])[A-Za-z\d@$!%*?&+/]{12,}$/;
 
-
-    if (user.length < 10 || user.length > 50 || !userRegex.test(user)) {
+    // Validación mínima (ajusta según tus requisitos)
+    if (user.length < 4 || user.length > 50 || !userRegex.test(user)) {
       setUserError(true);
-      setError("Usuario incorrecto");
+      setError("Usuario incorrecto o demasiado corto.");
       return false;
     }
-    if (password.length < 2 ) {
+    if (password.length < 2) {
       setPasswordError(true);
-      setError("Usuario o contraseña incorrectos");
+      setError("Usuario o contraseña incorrectos.");
       return false;
     }
     setUserError(false);
     setPasswordError(false);
     setError(null);
-    authorization()
+    authorization();
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     validateInputs();
@@ -129,101 +134,121 @@ export default function Login() {
     setCaptchaValue(value);
   };
 
- 
-
   return (
-    <div className="app">
-      <SignInContainer
-        direction="column"
-        justifyContent="space-between"
-        className="bodyLogin"
-      >
-        <Card>
-          <div className="d-flex justify-content-center mt-2 mb-1">
-            {/* <img src={logo} width="50%" height="84%" alt="Logo" /> */}
-          </div>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
+    <SignInContainer>
+      <StyledCard>
+        {/* Si tienes un logo, puedes descomentar e incluir aquí */}
+        {/* 
+        <Box display="flex" justifyContent="center">
+          <img src={logo} alt="Logo" style={{ width: "50%", height: "auto" }} />
+        </Box>
+        */}
+
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          noValidate
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+          }}
+        >
+          <Typography
+            variant="h5"
+            textAlign="center"
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              width: "100%",
-              gap: 2,
+              mb: 1,
+              fontWeight: "bold",
+              fontFamily: "Times New Roman, serif",
+              color:"#2E8B57",
             }}
           >
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel htmlFor="outlined-adornment-user">Usuario</InputLabel>
-              <OutlinedInput
-                onChange={(e) => setUsername(e.target.value)}
-                id="outlined-adornment-user"
-                error={userError}
-                type="text"
-                name="user"
-                placeholder="ejemplo.123"
-                autoComplete="username"
-                autoFocus
-                required
-                fullWidth
-                variant="outlined"
-                color={userError ? "error" : "primary"}
-                label="Usuario"
-              />
-            </FormControl>
+            Inicio de sesión
+          </Typography>
 
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel htmlFor="outlined-adornment-password">
-                Contraseña
-              </InputLabel>
-              <OutlinedInput
-                onChange={(e) => setPassword(e.target.value)}
-                id="outlined-adornment-password"
-                type={showPassword ? "text" : "password"}
-                error={passwordError}
-                color={passwordError ? "error" : "primary"}
-                placeholder="••••••••••••"
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      onMouseUp={handleMouseUpPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Contraseña"
-              />
-            </FormControl>
-            {error && (
-              <div className="error text-center text-danger">
-                <p>{error}</p>
-              </div>
-            )}
-            <div className="d-flex justify-content-center mt-2 mb-2 col-12 col-md-12">
-              <ReCAPTCHA
-                sitekey="6LdXWGIpAAAAAELm0POay9rlRRMWgrsZFcvX1jal"
-                onChange={handleCaptchaChange}
-              />
-            </div>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ background: "radial-gradient(#008FD5, #4AB8EC)",color:"white"}}
-              className="mt-2 mb-2"
-              size="normal"
-              disabled={!captchaValue || !password || !user}
+          <FormControl variant="outlined" fullWidth>
+            <InputLabel htmlFor="outlined-adornment-user">Usuario</InputLabel>
+            <OutlinedInput
+              onChange={(e) => setUsername(e.target.value)}
+              id="outlined-adornment-user"
+              error={userError}
+              type="text"
+              name="user"
+              placeholder="ejemplo.123"
+              autoComplete="username"
+              autoFocus
+              required
+              label="Usuario"
+              sx={{ bgcolor: "#cff5c4" }}
+            />
+          </FormControl>
+
+          <FormControl variant="outlined" fullWidth>
+            <InputLabel htmlFor="outlined-adornment-password">
+              Contraseña
+            </InputLabel>
+            <OutlinedInput
+              onChange={(e) => setPassword(e.target.value)}
+              id="outlined-adornment-password"
+              type={showPassword ? "text" : "password"}
+              error={passwordError}
+              placeholder="••••••••••••"
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    onMouseUp={handleMouseUpPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Contraseña"
+              sx={{ bgcolor: "#cff5c4" }}
+            />
+          </FormControl>
+
+          {/* Mensaje de error */}
+          {error && (
+            <Typography
+              variant="body2"
+              color="error"
+              textAlign="center"
+              mt={1}
             >
-              Iniciar sesión
-            </Button>
+              {error}
+            </Typography>
+          )}
+
+          {/* Captcha */}
+          <Box display="flex" justifyContent="center" mt={1}>
+            <ReCAPTCHA
+              sitekey="6LdXWGIpAAAAAELm0POay9rlRRMWgrsZFcvX1jal"
+              onChange={handleCaptchaChange}
+            />
           </Box>
-        </Card>
-      </SignInContainer>
-    </div>
+
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{
+              mt: 2,
+              background: "radial-gradient(#008FD5, #4AB8EC)",
+              color: "white",
+              fontWeight: "bold",
+              "&:hover": {
+                background: "radial-gradient(#006FB0, #449FD1)",
+              },
+            }}
+            disabled={!captchaValue || !password || !user}
+          >
+            Iniciar sesión
+          </Button>
+        </Box>
+      </StyledCard>
+    </SignInContainer>
   );
 }
