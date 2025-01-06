@@ -164,6 +164,7 @@ export default function NavBar() {
           top: 0,
           zIndex: (theme) => theme.zIndex.drawer + 1,
           backgroundColor: "#8FD5A6",
+          
         }}
       >
         <Toolbar>
@@ -204,6 +205,33 @@ export default function NavBar() {
               gap: 2
             }}
           >
+            <Button
+              onClick={toHome}
+              variant="text"
+              sx={{
+                color: "white",
+                textTransform: "none", // Evita las mayúsculas automáticas
+                position: "relative",
+                overflow: "hidden", // Asegura que el subrayado no se desborde
+                "&::after": {
+                  content: '""',
+                  position: "absolute",
+                  left: 0,
+                  bottom: 0,
+                  width: "100%",
+                  height: "2px", // Grosor del subrayado
+                  backgroundColor: "#2E8B57",
+                  transform: "scaleX(0)", // Oculto inicialmente
+                  transformOrigin: "left",
+                  transition: "transform 0.3s ease-in-out", // Animación suave
+                },
+                "&:hover::after": {
+                  transform: "scaleX(1)", // Se expande en hover
+                },
+              }}
+            >
+              Inicio
+            </Button>
             <Button
               onClick={toAbout}
               variant="text"
