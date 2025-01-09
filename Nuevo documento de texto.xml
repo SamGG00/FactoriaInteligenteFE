@@ -1,0 +1,13 @@
+<Configuration>
+  <Add OfficeClientEdition="64" Channel="PerpetualVL2024" SourcePath="\\Server\Share">
+    <Product ID="ProPlus2024Volume" PIDKEY="#####-#####-#####-#####-#####">
+      <Language ID="en-us" />
+    </Product>
+    <Product ID="ProofingTools">
+      <Language ID="de-de" />
+      <Language ID="es-es" />
+    </Product>
+  </Add>
+  <RemoveMSI />
+  <Display Level="None" AcceptEULA="TRUE" />
+</Configuration>

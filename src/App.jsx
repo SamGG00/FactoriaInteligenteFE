@@ -6,11 +6,12 @@ import About from './pages/about/about';
 import Info from './pages/info/Information';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Manage from './pages/manage/Manage';
+import { UserProvider } from './utils/userContext';
 /* import  {UserProvider}  from './context/userContext'; */
 function App() {
 
   return (
-/*     <UserProvider> */
+    <UserProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -21,7 +22,7 @@ function App() {
           
         </Routes>
       </BrowserRouter>
-      /* </UserProvider> */
+      </UserProvider> 
   )
 }
 

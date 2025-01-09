@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import {
   Box,
   Button,
@@ -18,6 +18,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 // import { UserContext } from "../../context/userContext";
 import logo from "../../assets/images/Logo Verde.png";
+import {UserContext} from "../../utils/userContext";
 
 const SignInContainer = styled(Stack)(({ theme }) => ({
   minHeight: "100vh", // Ocupa toda la ventana
@@ -51,40 +52,31 @@ export default function Login() {
   const [captchaValue, setCaptchaValue] = useState(null);
 
   // URL de ejemplo; ajusta según tu backend
-  const url = "http://localhost:3000/auth/login/";
+  const url = "http://localhost:3000/auth/login";
   const nav = useNavigate();
 
   // Si usas Context para manejar usuario, descomenta e importa tu contexto
-  /*
+  
   const {
-    setIdUser,
+    setUserId,
     setUser,
-    setAccessToken,
-    setRefreshToken,
-    setIsad,
-    setPsst
   } = useContext(UserContext);
-  */
+  
 
   const authorization = async () => {
     const data = {
-      user: user,
+      username: user,
       password: password,
     };
     try {
       const response = await axios.post(url, data);
-      const dataResponse = response.data;
+      const dataResponse = response;
+      console.log("response :",dataResponse)
       if (dataResponse.status) {
         // Descomenta si usas tu contexto de usuario
-        /*
-        setIdUser(dataResponse.data.iduser);
+        setUserId(dataResponse.data.iduser);
         setUser(dataResponse.data.user);
-        setAccessToken(dataResponse.accessToken);
-        setRefreshToken(dataResponse.refreshToken);
-        setIsad(dataResponse.data.isad ? 1 : null);
-        setPsst(dataResponse.data.passwordChanged ? 1 : 0);
-        */
-        nav("/dashboard");
+        nav("/user");
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
@@ -222,12 +214,12 @@ export default function Login() {
           )}
 
           {/* Captcha */}
-          <Box display="flex" justifyContent="center" mt={1}>
+          {/* <Box display="flex" justifyContent="center" mt={1}>
             <ReCAPTCHA
-              sitekey="6LdXWGIpAAAAAELm0POay9rlRRMWgrsZFcvX1jal"
+              sitekey=""
               onChange={handleCaptchaChange}
             />
-          </Box>
+          </Box> */}
 
           <Button
             type="submit"
@@ -241,7 +233,7 @@ export default function Login() {
                 background: "radial-gradient(#cff5c4, #2E8B57)",
               },
             }}
-            disabled={!captchaValue || !password || !user}
+            disabled={!password || !user}
           >
             Iniciar sesión
           </Button>
