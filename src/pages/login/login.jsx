@@ -69,14 +69,14 @@ export default function Login() {
       password: password,
     };
     try {
-      const response = await axios.post(url, data);
+      const response = await axios.post(url, data,{withCredentials:true});
       const dataResponse = response;
       console.log("response :",dataResponse)
       if (dataResponse.status) {
         // Descomenta si usas tu contexto de usuario
-        setUserId(dataResponse.data.iduser);
+        setUserId(dataResponse.data.id);
         setUser(dataResponse.data.user);
-        nav("/user");
+        nav("/dashboard");
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {

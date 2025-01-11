@@ -22,7 +22,9 @@ const getArticles= async(page=1)=>{
 
   const link = url+page
   console.log(link)
- const response= await axios.get(link)
+  const response = await axios.get(link, {
+    withCredentials: true, // Asegúrate de que las cookies se envíen
+  });
  console.log("response",response.data)
 
  if (response.data.status){

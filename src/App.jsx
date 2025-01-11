@@ -7,6 +7,8 @@ import Info from './pages/info/Information';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Manage from './pages/manage/Manage';
 import { UserProvider } from './utils/userContext';
+import PrivateRoute from './utils/protectedRoute.jsx'
+/* import NotFoundPage from './pages/notFound/NotFound' */
 /* import  {UserProvider}  from './context/userContext'; */
 function App() {
 
@@ -17,8 +19,14 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path='/About' element= {<About/>}/>
-          <Route path='/user' element= {<Manage/>}/>
           <Route path='/Information' element= {<Info/>}/>
+
+          <Route path="/" element={<PrivateRoute />}>
+
+          <Route path='/dashboard'  index element= {<Manage/>}/>
+          
+          </Route>
+          
           
         </Routes>
       </BrowserRouter>
