@@ -14,6 +14,7 @@ import { useTheme } from "@mui/material/styles";
 import { LinkedIn } from "@mui/icons-material";
 import Logo from "../../assets/images/Logo Verde.png";
 import NavBar from "/src/pages/home/components/AppBar.jsx";
+import Footer from "/src/pages/home/components/Footer.jsx"
 
 import perfil2 from "../../assets/images/perfil2.webp";
 
@@ -81,6 +82,7 @@ const BackgroundContainer = styled("div")(({ theme }) => ({
   background: "linear-gradient(135deg, #e0ffea 0%, #e0ffea 100%)",
   minHeight: "100vh",
   width: "100%",
+  height: "100%",
   paddingBottom: theme.spacing(5),
 }));
 
@@ -155,20 +157,20 @@ export default function About() {
             />
           </Box>
 
-          <Typography variant="body1" paragraph sx={{ textAlign: "justify" }}>
+          <Typography variant="body1" paragraph sx={{ textAlign: "justify",  fontFamily:"Times New Roman" , fontSize: 24, }}>
             La industria 4.0 ya es una realidad mundial y nacional y tiene
             desafíos para integrarse al entorno de producción actual, el que
             requiere la convergencia entre el entorno físico y el digital, lo
             que exige una transformación radical en la industria manufacturera.
           </Typography>
-          <Typography variant="body1" paragraph sx={{ textAlign: "justify" }}>
+          <Typography variant="body1" paragraph sx={{ textAlign: "justify", fontFamily:"Times New Roman" , fontSize: 24}}>
             Este desafío de transformación no solo impacta en los procedimientos
             operativos, sino también en las personas y en la nueva forma de
             trabajar en un mundo donde los datos se han convertido en la materia
             prima principal, en lugar de los materiales tradicionales utilizados
             en la fabricación de productos.
           </Typography>
-          <Typography variant="body1" paragraph sx={{ textAlign: "justify" }}>
+          <Typography variant="body1" paragraph sx={{ textAlign: "justify",fontFamily:"Times New Roman", fontSize: 24 }}>
             En Colombia, según estudios revisados, la presencia de la Industria
             4.0 está en proceso de crecimiento y en el sector de alimentos es
             incipiente, lo que hace relevante adoptar las innovaciones
@@ -236,7 +238,10 @@ export default function About() {
             ))}
           </Grid>
         </TabPanel>
+        
       </Container>
+      <Footer/>
     </BackgroundContainer>
+
   );
 }
