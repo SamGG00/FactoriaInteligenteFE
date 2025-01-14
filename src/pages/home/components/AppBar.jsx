@@ -15,6 +15,8 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Logo from "../../../assets/images/Logo Verde.png";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Search = styled("div")(({ theme, open }) => ({
   display: "flex",
@@ -67,6 +69,33 @@ export default function NavBar() {
   const navigate = useNavigate();
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/auth/validateToken", {
+          withCredentials: true, // Incluye las cookies
+        });
+        if (response.data.status) {
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        setIsAuthenticated(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
+  const handleLogout = async () => {
+    try {
+      await axios.post("http://localhost:3000/auth/logout", {}, { withCredentials: true });
+      setIsAuthenticated(false);
+      navigate("/");
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
+  };
 
   const handleIconClick = () => {
     setOpen((prev) => !prev);
@@ -97,9 +126,10 @@ export default function NavBar() {
   const toInfo = () => {
     navigate('/information');
   }
-  const toLogin = () =>{
+  const toLogin = () => {
     navigate('/login')
   }
+
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -290,9 +320,25 @@ export default function NavBar() {
               ¿Industria 4.0?
             </Button>
 
-            <Button onClick={toLogin} variant="outlined" sx={{ color: 'white', textTransform: 'none', borderColor: 'white' }}>
-              Iniciar Sesión
-            </Button>
+            <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
+              {isAuthenticated ? (
+                <Button
+                  onClick={handleLogout}
+                  variant="outlined"
+                  sx={{ color: "white", textTransform: "none", borderColor: "white" }}
+                >
+                  Cerrar Sesión
+                </Button>
+              ) : (
+                <Button
+                  onClick={toLogin}
+                  variant="outlined"
+                  sx={{ color: "white", textTransform: "none", borderColor: "white" }}
+                >
+                  Iniciar Sesión
+                </Button>
+              )}
+            </Box>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
