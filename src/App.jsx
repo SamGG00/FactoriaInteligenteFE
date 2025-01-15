@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Manage from './pages/manage/Manage';
 import { UserProvider } from './utils/userContext';
 import PrivateRoute from './utils/protectedRoute.jsx'
+import NewArticle from './pages/manage/NewArticle.jsx';
 /* import NotFoundPage from './pages/notFound/NotFound' */
 /* import  {UserProvider}  from './context/userContext'; */
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path='/Information' element= {<Info/>}/>
 
           <Route path="/" element={<PrivateRoute />}>
+          <Route path='/New-article'  index element= {<NewArticle/>}/>
 
           <Route path='/dashboard'  index element= {<Manage/>}/>
           

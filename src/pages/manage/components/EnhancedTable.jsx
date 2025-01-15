@@ -1,6 +1,5 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import { alpha } from "@mui/material/styles";
 import {
   Box,
   Table,
@@ -11,18 +10,17 @@ import {
   TableRow,
   TablePagination,
   TableSortLabel,
-  Toolbar,
   Typography,
   Paper,
-  Checkbox,
   IconButton,
   Tooltip,
-  Button
 } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CircularProgress from "@mui/material/CircularProgress";
+import ConfirmDialog from "./ConfirmDialog";
+
 const headCells = [
   { id: "nombre_del_articulo", numeric: false, disablePadding: false, label: "Nombre del articulo" },
   { id: "autor", numeric: false, disablePadding: false, label: "Autor" },
@@ -89,65 +87,13 @@ function EnhancedTableHead(props) {
 EnhancedTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
 
-function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
 
-  if (numSelected == 0) {
-    return null;
-  }
- 
 
-  return (
-    <Toolbar
-      sx={[
-        { pl: { sm: 1 }, pr: { xs: 1, sm: 1 } },
-        numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(
-              theme.palette.primary.main,
-              theme.palette.action.activatedOpacity
-            ),
-        },
-      ]}
-    >
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: "1 1 10%" }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected > 1
-            ? `${numSelected}seleccionados`
-            : `${numSelected} seleccionado`}
-        </Typography>
-      ) : (
-        /*  <Typography sx={{ flex: '1 1 0%' }} variant="h6" id="tableTitle" component="div">
-       
-        </Typography> */ " "
-      )}
-      {numSelected > 0 ? (
-        <Tooltip title="Editar">
-          <IconButton onClick={handleEdit}>
-          </IconButton>
-        </Tooltip>
-      ) : (
-        ""
-      )}
-    </Toolbar>
-  );
-}
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-  selected: PropTypes.array.isRequired,
-  codSelec: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
 
 export default function EnhancedTable({ rows }) {
   const [order, setOrder] = React.useState("asc");
@@ -156,6 +102,35 @@ export default function EnhancedTable({ rows }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [codSelec, setCodSelec] = React.useState(null);
+  const [openDialog, setOpenDialog] = React.useState(false); 
+  const [selectedId, setSelectedId] = React.useState(null); 
+  const [selectedArticle, setSelectedArticle] = React.useState(null);
+/*   const handleEdit = () => {
+    console.log("Editando: ", codSelec);
+  };
+ */
+
+
+  const handleOpenDialog = (id,name) => {
+    console.log("Open dialog")
+    setSelectedId(id);
+    setSelectedArticle(name);
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+    setSelectedId(null);
+  };
+
+  const handleConfirmDelete = () => {
+    console.log("Eliminando artículo:", selectedId);
+    handleCloseDialog();
+  };
+
+  const handleDelete=(id_seleccionado)=>{
+    console.log("Eliminando: ",id_seleccionado);
+  }
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -199,10 +174,6 @@ export default function EnhancedTable({ rows }) {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 5 }}>
-        <EnhancedTableToolbar
-          numSelected={selected.length}
-          codSelec={codSelec}
-        />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -232,13 +203,6 @@ export default function EnhancedTable({ rows }) {
                     selected={isItemSelected}
                     sx={{ cursor: "pointer" }}
                   >
-                   {/*  <TableCell padding="checkbox">
-                      <Checkbox
-                        color="primary"
-                        checked={isItemSelected}
-                        inputProps={{ "aria-labelledby": labelId }}
-                      />
-                    </TableCell> */}
                     <TableCell align="center" component="th">
                       {row.titulo}
                     </TableCell>
@@ -254,10 +218,9 @@ export default function EnhancedTable({ rows }) {
                     <TableCell align="center">
                       {row.fecha_publicado? row.fecha_publicado.replace("T05:00:00.000Z", ""):""}
                     </TableCell>
-
                     <TableCell align="center">
                     <Tooltip title="Eliminar articulo" placement="top">
-                    <IconButton aria-label="delete">
+                    <IconButton aria-label="delete"   onClick={() => handleOpenDialog(row.id_articulo,row.titulo)}>
                       <DeleteIcon  sx={{ color: "#c93401" }} />
                     </IconButton>
                     </Tooltip>
@@ -267,7 +230,6 @@ export default function EnhancedTable({ rows }) {
                     </IconButton>
                     </Tooltip>
                     </TableCell>
-
                   </TableRow>
                 );
               })}
@@ -289,6 +251,13 @@ export default function EnhancedTable({ rows }) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         /> 
       </Paper>
+      <ConfirmDialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        onConfirm={handleConfirmDelete}
+        title="¿Seguro deseas eliminar este artículo?"
+        message={`El artículo "${selectedArticle}" será eliminado. Esta acción no se puede deshacer.`}
+      />
     </Box>
   );
 }

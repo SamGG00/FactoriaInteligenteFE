@@ -3,6 +3,12 @@ import axios from 'axios';
 import NavBar from '../home/components/AppBar';
 import Grid from "@mui/material/Grid2";
 import EnhancedTable from './components/EnhancedTable'
+import { Button,Box} from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import { useNavigate } from "react-router-dom";
+
+
+
 
 export default function Manage() {
 const [articles,setArticles]=useState([])
@@ -10,6 +16,7 @@ const [loading,setLoading]=useState(true)
 const [page,setPage]=useState(1)
 const url= "http://localhost:3000/article/articles?page="
 
+const nav = useNavigate();
 
 useEffect(()=>{
   getArticles(page)
@@ -25,13 +32,24 @@ const getArticles= async(page=1)=>{
   const response = await axios.get(link, {
     withCredentials: true, // Asegúrate de que las cookies se envíen
   });
- console.log("response",response.data)
 
  if (response.data.status){
+  console.log(response.data)
   setArticles(response.data.articles)
   setLoading(false)
 
  }
+}
+
+const handleModalOpen=()=>{
+  nav("/New-article");
+}
+
+const handleModalClose=()=>{
+
+}
+const handleNewArticle=async () => {
+  
 }
   return (
     <div>
@@ -43,7 +61,13 @@ const getArticles= async(page=1)=>{
           </Grid>
           <Grid size={{ xs: 12, md: 12, sm: 12 }} >
   {!loading && (
+    <div className="">
+     
+     <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
+     <Button variant="contained" size="medium" startIcon={<AddIcon/>} sx={{alignItems:'flex-end'}} onClick={handleModalOpen}> Articulo</Button>
+</Box>
     <EnhancedTable rows={articles} />
+    </div>
   )}
 </Grid>
 
