@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid2";
 import { Button, TextField, Input, Box } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import DoNotDisturbAltIcon from "@mui/icons-material/DoNotDisturbAlt";
-
+import '../../assets/css/newArticle.css'
 export default function NewArticle() {
   // Estados para los campos
   const [title, setTitle] = useState(null);
@@ -13,11 +13,45 @@ export default function NewArticle() {
   const [errorMessage, setErrorMessage] = useState("");
 
   // Estado para cada campo adicional
-  const [fields, setFields] = useState([null, null, null, null, null, null]);
-
+  const [field1,setField1]=useState('');
+  const [field2,setField2]=useState('');
+  const [field3,setField3]=useState('');
+  const [field4,setField4]=useState('');
+  const [field5,setField5]=useState('');
+  const [field6,setField6]=useState('');
 
   // Estado para gestionar el tipo de contenido seleccionado (Texto o Imagen)
-  const [contentType, setContentType] = useState(1); // Predeterminado a 1 para mostrar el campo de texto
+  const [contentType1, setContentType1] = useState(1); 
+  const [contentType2, setContentType2] = useState(1);
+  const [contentType3, setContentType3] = useState(1); 
+  const [contentType4, setContentType4] = useState(1);
+  const [contentType5, setContentType5] = useState(1); 
+  const [contentType6, setContentType6] = useState(1); 
+
+
+  const handleChangeField= (block,value) => {
+    switch(block){
+      case 1: setField1(value); break;
+      case 2: setField2(value); break;
+      case 3: setField3(value); break;
+      case 4: setField4(value); break;
+      case 5: setField5(value); break;
+      case 6: setField6(value); break;
+      default: break;
+    }
+  }
+
+  const selectorType=(block,type)=>{
+    switch(block){
+      case 1: setContentType1(type); break;
+      case 2: setContentType2(type); break;
+      case 3: setContentType3(type); break;
+      case 4: setContentType4(type); break;
+      case 5: setContentType5(type); break;
+      case 6: setContentType6(type); break;
+      default: break;
+    }
+  }
 
   // Lógica para manejar el campo de palabras clave
   const handleChangeKeyWords = (info) => {
@@ -32,21 +66,9 @@ export default function NewArticle() {
     setKeywords(info);
   };
 
-
-  const handleChangeField = (index, value) => {
-    const newFields = [...fields];
-    newFields[index] = value;
-    setFields(newFields);
-  };
-
-  // Función para seleccionar el tipo de contenido (Texto o Imagen)
-  const selecterType = (type) => {
-    setContentType(type); 
-  };
-
   useEffect(() => {
-    console.log(keywords);
-  }, [keywords]);
+    console.log(field1);
+  }, [field1]);
 
   return (
     <div>
@@ -120,7 +142,6 @@ export default function NewArticle() {
             size={{ xs: 12 }}
             sx={{
               mb: 2,
-              minHeight: 300,
               display: "flex",
               justifyContent: "center",
               flexDirection: "column", // Permite apilar los botones y el campo
@@ -129,16 +150,16 @@ export default function NewArticle() {
             <Box sx={{ mb: 2 }}>
               <Button
                 className="btn-1"
-                onClick={() => selecterType(1)}
-                variant={contentType === 1 ? "contained" : "outlined"}
+                onClick={() => selectorType(1, 1)}
+                variant={contentType1 === 1 ? 'contained' : 'outlined'}
                 sx={{ marginRight: 2 }}
               >
                 Texto
               </Button>
               <Button
                 className="btn-1"
-                onClick={() => selecterType(2)}
-                variant={contentType === 2 ? "contained" : "outlined"}
+                onClick={() => selectorType(1, 2)}
+                variant={contentType1 === 2 ? "contained" : "outlined"}
               >
                 Imagen
               </Button>
@@ -146,7 +167,7 @@ export default function NewArticle() {
 
             {/* Campo de texto o imagen, según la selección */}
             <Box sx={{ width: "100%" }}>
-              {contentType === 1 && (
+              {contentType1 === 1 && (
                 <TextField
                   label="Descripción"
                   multiline
@@ -154,18 +175,77 @@ export default function NewArticle() {
                   variant="outlined"
                   fullWidth
                   placeholder="Escribe algo aquí..."
-                  value={fields[0]} // Usamos el primer campo para texto
-                  onChange={(e) => handleChangeField(0, e.target.value)}
+                  value={field1} // Usamos el primer campo para texto
+                  onChange={(e) => handleChangeField(1, e.target.value)}
                 />
               )}
 
-              {contentType === 2 && (
+              {contentType1 === 2 && (
+                <Box>
+                <Input
+                  type="file"
+                  inputProps={{ accept: "image/*" }}
+                  id="file-upload"
+                  style={{ display: "none" }}
+                  onChange={(e) => handleChangeField(1, e.target.files[0])}
+                />
+                <label htmlFor="file-upload" className="custom-label">
+                  Subir imagen
+                </label>
+              </Box>
+              )}
+            </Box>
+          </Grid>
+
+          <Grid
+            size={{ xs: 12 }}
+            sx={{
+              mb: 2,
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column", // Permite apilar los botones y el campo
+            }}
+          >
+            <Box sx={{ mb: 2 }}>
+              <Button
+                className="btn-1"
+                onClick={() => selectorType(2,1)}
+                variant={contentType2 === 1 ? "contained" : "outlined"}
+                sx={{ marginRight: 2 }}
+              >
+                Texto
+              </Button>
+              <Button
+                className="btn-1"
+                onClick={() => selectorType(2,2)}
+                variant={contentType2 === 2 ? "contained" : "outlined"}
+              >
+                Imagen
+              </Button>
+            </Box>
+
+            {/* Campo de texto o imagen, según la selección */}
+            <Box sx={{ width: "100%" }}>
+              {contentType1 === 1 && (
+                <TextField
+                  label="Descripción"
+                  multiline
+                  rows={4} // Número de filas visibles por defecto
+                  variant="outlined"
+                  fullWidth
+                  placeholder="Escribe algo aquí..."
+                  value={field2} // Usamos el primer campo para texto
+                  onChange={(e) => handleChangeField(2, e.target.value)}
+                />
+              )}
+
+              {contentType2 === 2 && (
                 <Input
                   type="file"
                   inputProps={{ accept: "image/*" }}
                   fullWidth
                   sx={{ marginTop: 3 }}
-                  onChange={(e) => handleChangeField(0, e.target.files[0])}
+                  onChange={(e) => handleChangeField(2, e.target.files[0])}
                 />
               )}
             </Box>
@@ -175,7 +255,6 @@ export default function NewArticle() {
             size={{ xs: 12 }}
             sx={{
               mb: 2,
-              minHeight: 300,
               display: "flex",
               justifyContent: "center",
               flexDirection: "column", // Permite apilar los botones y el campo
@@ -184,16 +263,16 @@ export default function NewArticle() {
             <Box sx={{ mb: 2 }}>
               <Button
                 className="btn-1"
-                onClick={() => selecterType(1)}
-                variant={contentType === 1 ? "contained" : "outlined"}
+                onClick={() => selectorType(3,1)}
+                variant={contentType3 === 1 ? "contained" : "outlined"}
                 sx={{ marginRight: 2 }}
               >
                 Texto
               </Button>
               <Button
                 className="btn-1"
-                onClick={() => selecterType(2)}
-                variant={contentType === 2 ? "contained" : "outlined"}
+                onClick={() => selectorType(3,2)}
+                variant={contentType3 === 2 ? "contained" : "outlined"}
               >
                 Imagen
               </Button>
@@ -201,7 +280,7 @@ export default function NewArticle() {
 
             {/* Campo de texto o imagen, según la selección */}
             <Box sx={{ width: "100%" }}>
-              {contentType === 1 && (
+              {contentType3 === 1 && (
                 <TextField
                   label="Descripción"
                   multiline
@@ -209,18 +288,18 @@ export default function NewArticle() {
                   variant="outlined"
                   fullWidth
                   placeholder="Escribe algo aquí..."
-                  value={fields[0]} // Usamos el primer campo para texto
-                  onChange={(e) => handleChangeField(0, e.target.value)}
+                  value={field3} // Usamos el primer campo para texto
+                  onChange={(e) => handleChangeField(3, e.target.value)}
                 />
               )}
 
-              {contentType === 2 && (
+              {contentType3 === 2 && (
                 <Input
                   type="file"
                   inputProps={{ accept: "image/*" }}
                   fullWidth
                   sx={{ marginTop: 3 }}
-                  onChange={(e) => handleChangeField(0, e.target.files[0])}
+                  onChange={(e) => handleChangeField(3, e.target.files[0])}
                 />
               )}
             </Box>
@@ -230,7 +309,6 @@ export default function NewArticle() {
             size={{ xs: 12 }}
             sx={{
               mb: 2,
-              minHeight: 300,
               display: "flex",
               justifyContent: "center",
               flexDirection: "column", // Permite apilar los botones y el campo
@@ -239,16 +317,16 @@ export default function NewArticle() {
             <Box sx={{ mb: 2 }}>
               <Button
                 className="btn-1"
-                onClick={() => selecterType(1)}
-                variant={contentType === 1 ? "contained" : "outlined"}
+                onClick={() => selectorType(4,1)}
+                variant={contentType4 === 1 ? "contained" : "outlined"}
                 sx={{ marginRight: 2 }}
               >
                 Texto
               </Button>
               <Button
                 className="btn-1"
-                onClick={() => selecterType(2)}
-                variant={contentType === 2 ? "contained" : "outlined"}
+                onClick={() => selectorType(4,2)}
+                variant={contentType4 === 2 ? "contained" : "outlined"}
               >
                 Imagen
               </Button>
@@ -256,7 +334,7 @@ export default function NewArticle() {
 
             {/* Campo de texto o imagen, según la selección */}
             <Box sx={{ width: "100%" }}>
-              {contentType === 1 && (
+              {contentType4 === 1 && (
                 <TextField
                   label="Descripción"
                   multiline
@@ -264,18 +342,18 @@ export default function NewArticle() {
                   variant="outlined"
                   fullWidth
                   placeholder="Escribe algo aquí..."
-                  value={fields[0]} // Usamos el primer campo para texto
-                  onChange={(e) => handleChangeField(0, e.target.value)}
+                  value={field4} // Usamos el primer campo para texto
+                  onChange={(e) => handleChangeField(4, e.target.value)}
                 />
               )}
 
-              {contentType === 2 && (
+              {contentType4 === 2 && (
                 <Input
                   type="file"
                   inputProps={{ accept: "image/*" }}
                   fullWidth
                   sx={{ marginTop: 3 }}
-                  onChange={(e) => handleChangeField(0, e.target.files[0])}
+                  onChange={(e) => handleChangeField(4, e.target.files[0])}
                 />
               )}
             </Box>
@@ -285,7 +363,6 @@ export default function NewArticle() {
             size={{ xs: 12 }}
             sx={{
               mb: 2,
-              minHeight: 300,
               display: "flex",
               justifyContent: "center",
               flexDirection: "column", // Permite apilar los botones y el campo
@@ -294,16 +371,16 @@ export default function NewArticle() {
             <Box sx={{ mb: 2 }}>
               <Button
                 className="btn-1"
-                onClick={() => selecterType(1)}
-                variant={contentType === 1 ? "contained" : "outlined"}
+                onClick={() => selectorType(5,1)}
+                variant={contentType5 === 1 ? "contained" : "outlined"}
                 sx={{ marginRight: 2 }}
               >
                 Texto
               </Button>
               <Button
                 className="btn-1"
-                onClick={() => selecterType(2)}
-                variant={contentType === 2 ? "contained" : "outlined"}
+                onClick={() => selectorType(5,2)}
+                variant={contentType5 === 2 ? "contained" : "outlined"}
               >
                 Imagen
               </Button>
@@ -311,7 +388,7 @@ export default function NewArticle() {
 
             {/* Campo de texto o imagen, según la selección */}
             <Box sx={{ width: "100%" }}>
-              {contentType === 1 && (
+              {contentType5 === 1 && (
                 <TextField
                   label="Descripción"
                   multiline
@@ -319,18 +396,18 @@ export default function NewArticle() {
                   variant="outlined"
                   fullWidth
                   placeholder="Escribe algo aquí..."
-                  value={fields[0]} // Usamos el primer campo para texto
-                  onChange={(e) => handleChangeField(0, e.target.value)}
+                  value={field5} // Usamos el primer campo para texto
+                  onChange={(e) => handleChangeField(5, e.target.value)}
                 />
               )}
 
-              {contentType === 2 && (
+              {contentType5 === 2 && (
                 <Input
                   type="file"
                   inputProps={{ accept: "image/*" }}
                   fullWidth
                   sx={{ marginTop: 3 }}
-                  onChange={(e) => handleChangeField(0, e.target.files[0])}
+                  onChange={(e) => handleChangeField(5, e.target.files[0])}
                 />
               )}
             </Box>
@@ -339,8 +416,6 @@ export default function NewArticle() {
           <Grid
             size={{ xs: 12 }}
             sx={{
-              mb: 2,
-              minHeight: 300,
               display: "flex",
               justifyContent: "center",
               flexDirection: "column", // Permite apilar los botones y el campo
@@ -349,16 +424,16 @@ export default function NewArticle() {
             <Box sx={{ mb: 2 }}>
               <Button
                 className="btn-1"
-                onClick={() => selecterType(1)}
-                variant={contentType === 1 ? "contained" : "outlined"}
+                onClick={() => selectorType(6,1)}
+                variant={contentType6 === 1 ? "contained" : "outlined"}
                 sx={{ marginRight: 2 }}
               >
                 Texto
               </Button>
               <Button
                 className="btn-1"
-                onClick={() => selecterType(2)}
-                variant={contentType === 2 ? "contained" : "outlined"}
+                onClick={() => selectorType(6,2)}
+                variant={contentType6 === 2 ? "contained" : "outlined"}
               >
                 Imagen
               </Button>
@@ -366,7 +441,7 @@ export default function NewArticle() {
 
             {/* Campo de texto o imagen, según la selección */}
             <Box sx={{ width: "100%" }}>
-              {contentType === 1 && (
+              {contentType6 === 1 && (
                 <TextField
                   label="Descripción"
                   multiline
@@ -374,72 +449,18 @@ export default function NewArticle() {
                   variant="outlined"
                   fullWidth
                   placeholder="Escribe algo aquí..."
-                  value={fields[0]} // Usamos el primer campo para texto
-                  onChange={(e) => handleChangeField(0, e.target.value)}
+                  value={field6} // Usamos el primer campo para texto
+                  onChange={(e) => handleChangeField(6, e.target.value)}
                 />
               )}
 
-              {contentType === 2 && (
+              {contentType6 === 2 && (
                 <Input
                   type="file"
                   inputProps={{ accept: "image/*" }}
                   fullWidth
                   sx={{ marginTop: 3 }}
-                  onChange={(e) => handleChangeField(0, e.target.files[0])}
-                />
-              )}
-            </Box>
-          </Grid>
-
-          <Grid
-            size={{ xs: 12 }}
-            sx={{
-              minHeight: 300,
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "column", // Permite apilar los botones y el campo
-            }}
-          >
-            <Box sx={{ mb: 2 }}>
-              <Button
-                className="btn-1"
-                onClick={() => selecterType(1)}
-                variant={contentType === 1 ? "contained" : "outlined"}
-                sx={{ marginRight: 2 }}
-              >
-                Texto
-              </Button>
-              <Button
-                className="btn-1"
-                onClick={() => selecterType(2)}
-                variant={contentType === 2 ? "contained" : "outlined"}
-              >
-                Imagen
-              </Button>
-            </Box>
-
-            {/* Campo de texto o imagen, según la selección */}
-            <Box sx={{ width: "100%" }}>
-              {contentType === 1 && (
-                <TextField
-                  label="Descripción"
-                  multiline
-                  rows={4} // Número de filas visibles por defecto
-                  variant="outlined"
-                  fullWidth
-                  placeholder="Escribe algo aquí..."
-                  value={fields[0]} // Usamos el primer campo para texto
-                  onChange={(e) => handleChangeField(0, e.target.value)}
-                />
-              )}
-
-              {contentType === 2 && (
-                <Input
-                  type="file"
-                  inputProps={{ accept: "image/*" }}
-                  fullWidth
-                  sx={{ marginTop: 3 }}
-                  onChange={(e) => handleChangeField(0, e.target.files[0])}
+                  onChange={(e) => handleChangeField(6, e.target.files[0])}
                 />
               )}
             </Box>
