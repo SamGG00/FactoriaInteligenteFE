@@ -56,7 +56,7 @@ const handleNewArticle=async () => {
     <NavBar />
       <div className="container">
        <Grid container spacing={2}>
-        <Grid  size={{ xs: 12, md: 12, sm: 12 }} sx={{mt:5}}>
+        <Grid  size={{ xs: 12, md: 12, sm: 12 }} sx={{mt:3}}>
           <h2>Listado de artículos</h2>
           </Grid>
           <Grid size={{ xs: 12, md: 12, sm: 12 }} >
