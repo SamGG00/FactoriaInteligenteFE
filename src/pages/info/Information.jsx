@@ -2,10 +2,6 @@ import React from 'react';
 import { Card, CardContent, Typography, Container, Box, Paper, Divider } from '@mui/material';
 import NavBar from "/src/pages/home/components/AppBar.jsx";
 import Footer from "/src/pages/home/components/Footer.jsx";
-
-
-
-
 export default function Informacion() {
   return (
     <div>
