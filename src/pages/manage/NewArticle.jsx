@@ -5,15 +5,18 @@ import {
   Button,
   TextField,
   Input,
-  Typography,
   Checkbox,
   FormControlLabel,
+  Snackbar,
+  Alert
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import NavBar from "../home/components/AppBar";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import axios from "axios";
 import "../../assets/css/newArticle.css";
+import { useNavigate } from "react-router-dom";
+
 const ArticleEditor = () => {
   const [fields, setFields] = useState([
     { type: 1, value: "" }, // Bloque 1
@@ -29,6 +32,10 @@ const ArticleEditor = () => {
   const [keywords, setKeywords] = useState("");
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [alertOpen, setAlertOpen] = useState(false);
+
+  const nav = useNavigate();
+
   const handleFieldChange = (index, value, preview = null) => {
     setFields((prev) =>
       prev.map((field, i) =>
@@ -55,19 +62,16 @@ const ArticleEditor = () => {
     formData.append("author", 3);
     formData.append("published", published);
 
-    console.log(keywords)
-    // Agregar los campos dinámicos
     fields.forEach((field, index) => {
       if (field.type === 1) {
         // Campo de texto
         formData.append(`field${index + 1}`, field.value);
-      } else if (field.type === 2) {
+      } else if (field.type === 2 && field.value instanceof File) {
         // Campo de imagen
         formData.append(`field${index + 1}`, field.value);
       }
     });
 
-    console.log("esto es formData:", formData);
     try {
       const response = await axios.post(
         "http://localhost:3000/article/newArticle",
@@ -79,7 +83,12 @@ const ArticleEditor = () => {
           withCredentials: true, // Incluye las cookies en la solicitud
         }
       );
-
+      if (response.data.status){
+        setAlertOpen(true)
+          setTimeout(() => {
+          nav("/dashboard");
+        }, 2000); // Espera 2 segundos 
+      }
       console.log("Respuesta del servidor:", response.data);
       // Aquí puedes manejar la respuesta del servidor, como redireccionar o mostrar un mensaje de éxito
     } catch (error) {
@@ -87,10 +96,13 @@ const ArticleEditor = () => {
       // Aquí puedes manejar el error, como mostrar un mensaje de error al usuario
     }
   };
-  useEffect(() => {
-    console.log(fields);
-  }, [fields]);
 
+  const handleCloseAlert =  (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setAlertOpen(false);
+  };
   return (
     <div>
       <NavBar />
@@ -230,6 +242,16 @@ const ArticleEditor = () => {
           </Button>
         </Box>
       </Box>
+      <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleCloseAlert}>
+        <Alert
+          onClose={handleCloseAlert}
+          severity="success"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+    {`Articulo ${title} creado exitosamente!`}
+  </Alert>
+</Snackbar>
     </div>
   );
 };

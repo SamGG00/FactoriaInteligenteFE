@@ -3,7 +3,8 @@ import axios from 'axios';
 import NavBar from '../home/components/AppBar';
 import Grid from "@mui/material/Grid2";
 import EnhancedTable from './components/EnhancedTable'
-import { Button,Box} from '@mui/material';
+import { Button,Box, Snackbar,
+  Alert} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
 
@@ -14,6 +15,9 @@ export default function Manage() {
 const [articles,setArticles]=useState([])
 const [loading,setLoading]=useState(true)
 const [page,setPage]=useState(1)
+const [alertOpen, setAlertOpen] = useState(false);
+
+
 const url= "http://localhost:3000/article/articles?page="
 
 const nav = useNavigate();
@@ -41,16 +45,33 @@ const getArticles= async(page=1)=>{
  }
 }
 
+const deleteArticle = async (articleId) => {
+  try {
+    const response = await axios.delete(`http://localhost:3000/article/article/${articleId}`, {
+      withCredentials: true, // Incluye las cookies si es necesario
+    });
+    console.log(response.data);
+    if (response.data.status){
+      setAlertOpen(true);
+      getArticles(page)
+      console.log("Articulo eliminado correctamente")
+    }
+  } catch (error) {
+    console.error("Error al eliminar el artículo:", error);
+  }
+};
+
+
 const handleModalOpen=()=>{
   nav("/New-article");
 }
 
-const handleModalClose=()=>{
-
-}
-const handleNewArticle=async () => {
-  
-}
+const handleCloseAlert =  (event, reason) => {
+  if (reason === 'clickaway') {
+    return;
+  }
+  setAlertOpen(false);
+};
   return (
     <div>
     <NavBar />
@@ -66,13 +87,24 @@ const handleNewArticle=async () => {
      <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
      <Button variant="contained" size="medium" startIcon={<AddIcon/>} sx={{alignItems:'flex-end'}} onClick={handleModalOpen}> Articulo</Button>
 </Box>
-    <EnhancedTable rows={articles} />
+    <EnhancedTable rows={articles} deleteArticle={deleteArticle} />
     </div>
   )}
 </Grid>
 
        </Grid>
       </div>
+
+       <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleCloseAlert} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} >
+              <Alert
+                onClose={handleCloseAlert}
+                severity="success"
+                variant="filled"
+                sx={{ width: '100%' }}
+              >
+          {`Articulo eliminado  exitosamente!`}
+        </Alert>
+        </Snackbar>
     </div>
   )
 }

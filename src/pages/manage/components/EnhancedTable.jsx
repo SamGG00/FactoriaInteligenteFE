@@ -92,7 +92,7 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable({ rows }) {
+export default function EnhancedTable({ rows,deleteArticle }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("documento");
   const [selected, setSelected] = React.useState([]);
@@ -120,11 +120,13 @@ export default function EnhancedTable({ rows }) {
     setSelectedId(null);
   };
 
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = async () => {
     console.log("Eliminando artículo:", selectedId);
+    await deleteArticle(selectedId);
     handleCloseDialog();
   };
 
+  
   const handleDelete=(id_seleccionado)=>{
     console.log("Eliminando: ",id_seleccionado);
   }
