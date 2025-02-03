@@ -21,15 +21,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path='/About' element= {<About/>}/>
           <Route path='/Information' element= {<Info/>}/>
-
           <Route path="/" element={<PrivateRoute />}>
           <Route path='/New-article'  index element= {<NewArticle/>}/>
-
           <Route path='/dashboard'  index element= {<Manage/>}/>
-          
           </Route>
-          
-          
         </Routes>
       </BrowserRouter>
       </UserProvider> 

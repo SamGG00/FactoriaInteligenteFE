@@ -49,9 +49,15 @@ const ArticleEditor = () => {
     );
   };
   const handleChangeKeyWords = (info) => {
-    const keywordArray = info.split(",").map((kw) => kw.trim());
+     info.split(",").map((kw) => kw.trim());
     setKeywords(info);
   };
+
+  useEffect(() => {
+    console.log(published)
+ ,[published]
+  } )
+  
 
   const guardarArticulo = async () => {
     const formData = new FormData();
@@ -60,7 +66,7 @@ const ArticleEditor = () => {
     formData.append("title", title);
     formData.append("keywords", keywords);
     formData.append("author", 3);
-    formData.append("published", published);
+    formData.append("published", published? 1:0);
 
     fields.forEach((field, index) => {
       if (field.type === 1) {
