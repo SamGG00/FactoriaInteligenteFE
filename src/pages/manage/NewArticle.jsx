@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import {
   Box,
   Grid,
@@ -16,7 +16,8 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 import axios from "axios";
 import "../../assets/css/newArticle.css";
 import { useNavigate } from "react-router-dom";
-
+import { UserContext } from "../../utils/userContext";
+/* f2H6%8sbn&5j481 user id */ 
 const ArticleEditor = () => {
   const [fields, setFields] = useState([
     { type: 1, value: "" }, // Bloque 1
@@ -34,6 +35,10 @@ const ArticleEditor = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [alertOpen, setAlertOpen] = useState(false);
 
+  
+  const {
+    userId
+  } = useContext(UserContext);
   const nav = useNavigate();
 
   const handleFieldChange = (index, value, preview = null) => {
@@ -54,18 +59,14 @@ const ArticleEditor = () => {
   };
 
   useEffect(() => {
-    console.log(published)
- ,[published]
-  } )
+}   ,[userId] )
   
-
   const guardarArticulo = async () => {
     const formData = new FormData();
 
-    // Agregar el título y las palabras clave
     formData.append("title", title);
     formData.append("keywords", keywords);
-    formData.append("author", 3);
+    formData.append("author", userId);
     formData.append("published", published? 1:0);
 
     fields.forEach((field, index) => {

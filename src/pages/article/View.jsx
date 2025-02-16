@@ -17,12 +17,10 @@ export default function View() {
     const response = await axios.get(
       `http://localhost:3000/article/${idArticle}`
     );
-    console.log("esto es response", response.data);
     if (!response.data.status) {
       alert("Error al cargar el artículo");
       return;
     }
-    /* http://localhost:3000/uploads/1739485337681.jpeg */
     setArticle(response.data.article);
   };
 

@@ -15,8 +15,6 @@ const UserProvider = ({ children }) => {
     const tabCount = sessionStorage.getItem("tabCount");
     sessionStorage.setItem("tabCount", tabCount ? parseInt(tabCount) + 1 : 1);
 
-    
-
   
     if (user) {
       localStorage.setItem("u25#5dvo$iasFD5#", encryptStorage(user));

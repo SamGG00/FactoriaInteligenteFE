@@ -20,6 +20,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CircularProgress from "@mui/material/CircularProgress";
 import ConfirmDialog from "./ConfirmDialog";
+import { useNavigate } from "react-router-dom";
+
 
 const headCells = [
   { id: "nombre_del_articulo", numeric: false, disablePadding: false, label: "Nombre del articulo" },
@@ -102,11 +104,8 @@ export default function EnhancedTable({ rows,deleteArticle }) {
   const [openDialog, setOpenDialog] = React.useState(false); 
   const [selectedId, setSelectedId] = React.useState(null); 
   const [selectedArticle, setSelectedArticle] = React.useState(null);
-/*   const handleEdit = () => {
-    console.log("Editando: ", codSelec);
-  };
- */
 
+  const nav = useNavigate();
 
   const handleOpenDialog = (id,name) => {
     console.log("Open dialog")
@@ -126,16 +125,21 @@ export default function EnhancedTable({ rows,deleteArticle }) {
     handleCloseDialog();
   };
 
-  
-  const handleDelete=(id_seleccionado)=>{
-    console.log("Eliminando: ",id_seleccionado);
+  const handleEdit = (codSelec) => {
+    console.log("Editando: ", codSelec);
+    nav(`/Edit-article/${codSelec}`);
   }
 
+  const handleOpenArticle = (id) => {
+    nav(`/article/${id}`)
+  }
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
+
+
 
   const handleClick = (event, id) => {
     if (selected[0] === id) {
@@ -202,7 +206,7 @@ export default function EnhancedTable({ rows,deleteArticle }) {
                     selected={isItemSelected}
                     sx={{ cursor: "pointer" }}
                   >
-                    <TableCell align="center" component="th">
+                    <TableCell align="center" component="th" onClick={()=> handleOpenArticle(row.id_articulo)}>
                       {row.titulo}
                     </TableCell>
                     <TableCell align="center" component="th">
@@ -224,7 +228,7 @@ export default function EnhancedTable({ rows,deleteArticle }) {
                     </IconButton>
                     </Tooltip>
                     <Tooltip title="Editar articulo" placement="top">
-                    <IconButton aria-label="delete">
+                    <IconButton aria-label="delete" onClick={() => handleEdit(row.id_articulo)}>
                       <EditIcon  sx={{ color: "#076633" }} />
                     </IconButton>
                     </Tooltip>
