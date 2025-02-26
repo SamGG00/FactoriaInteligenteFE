@@ -11,6 +11,7 @@ import PrivateRoute from './utils/protectedRoute.jsx'
 import NewArticle from './pages/manage/NewArticle.jsx';
 import View from './pages/article/View.jsx';
 import EditArticle from './pages/manage/EditArticle.jsx';
+import Quiz from './pages/quiz/Quiz.jsx';
 /* import NotFoundPage from './pages/notFound/NotFound' */
 /* import  {UserProvider}  from './context/userContext'; */
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path='/New-article'  index element= {<NewArticle/>}/>
           <Route path='/dashboard'  index element= {<Manage/>}/>
           <Route path='/Edit-article/:id'  index element= {<EditArticle/>}/>
+          <Route path='/Quiz' index element={<Quiz/>}/>
 
           </Route>
         </Routes>

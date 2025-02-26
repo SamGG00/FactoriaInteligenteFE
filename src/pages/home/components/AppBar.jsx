@@ -87,6 +87,7 @@ export default function NavBar() {
 
     checkAuth();
   }, []);
+
   const handleLogout = async () => {
     try {
       await axios.post("http://localhost:3000/auth/logout", {}, { withCredentials: true });
@@ -117,19 +118,26 @@ export default function NavBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  // Funciones de navegación
   const toAbout = () => {
     navigate('/about');
-  }
+  };
   const toHome = () => {
     navigate('/');
-  }
+  };
   const toInfo = () => {
     navigate('/information');
-  }
+  };
   const toLogin = () => {
-    navigate('/login')
+    navigate('/login');
+  };
+  // NUEVA FUNCIÓN para la página de Artículos
+  const toArticulos = () => {
+    navigate('/dashboard');
+  };
+  const toQuiz = ()=> {
+    navigate('/Quiz')
   }
-
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -197,7 +205,6 @@ export default function NavBar() {
           top: 0,
           zIndex: (theme) => theme.zIndex.drawer + 1,
           backgroundColor: "#8FD5A6",
-
         }}
       >
         <Toolbar>
@@ -243,23 +250,23 @@ export default function NavBar() {
               variant="text"
               sx={{
                 color: "white",
-                textTransform: "none", // Evita las mayúsculas automáticas
+                textTransform: "none",
                 position: "relative",
-                overflow: "hidden", // Asegura que el subrayado no se desborde
+                overflow: "hidden",
                 "&::after": {
                   content: '""',
                   position: "absolute",
                   left: 0,
                   bottom: 0,
                   width: "100%",
-                  height: "2px", // Grosor del subrayado
+                  height: "2px",
                   backgroundColor: "#2E8B57",
-                  transform: "scaleX(0)", // Oculto inicialmente
+                  transform: "scaleX(0)",
                   transformOrigin: "left",
-                  transition: "transform 0.3s ease-in-out", // Animación suave
+                  transition: "transform 0.3s ease-in-out",
                 },
                 "&:hover::after": {
-                  transform: "scaleX(1)", // Se expande en hover
+                  transform: "scaleX(1)",
                 },
               }}
             >
@@ -270,23 +277,23 @@ export default function NavBar() {
               variant="text"
               sx={{
                 color: "white",
-                textTransform: "none", // Evita las mayúsculas automáticas
+                textTransform: "none",
                 position: "relative",
-                overflow: "hidden", // Asegura que el subrayado no se desborde
+                overflow: "hidden",
                 "&::after": {
                   content: '""',
                   position: "absolute",
                   left: 0,
                   bottom: 0,
                   width: "100%",
-                  height: "2px", // Grosor del subrayado
+                  height: "2px",
                   backgroundColor: "#2E8B57",
-                  transform: "scaleX(0)", // Oculto inicialmente
+                  transform: "scaleX(0)",
                   transformOrigin: "left",
-                  transition: "transform 0.3s ease-in-out", // Animación suave
+                  transition: "transform 0.3s ease-in-out",
                 },
                 "&:hover::after": {
-                  transform: "scaleX(1)", // Se expande en hover
+                  transform: "scaleX(1)",
                 },
               }}
             >
@@ -297,48 +304,105 @@ export default function NavBar() {
               variant="text"
               sx={{
                 color: "white",
-                textTransform: "none", // Evita las mayúsculas automáticas
+                textTransform: "none",
                 position: "relative",
-                overflow: "hidden", // Asegura que el subrayado no se desborde
+                overflow: "hidden",
                 "&::after": {
                   content: '""',
                   position: "absolute",
                   left: 0,
                   bottom: 0,
                   width: "100%",
-                  height: "2px", // Grosor del subrayado
+                  height: "2px",
                   backgroundColor: "#2E8B57",
-                  transform: "scaleX(0)", // Oculto inicialmente
+                  transform: "scaleX(0)",
                   transformOrigin: "left",
-                  transition: "transform 0.3s ease-in-out", // Animación suave
+                  transition: "transform 0.3s ease-in-out",
                 },
                 "&:hover::after": {
-                  transform: "scaleX(1)", // Se expande en hover
+                  transform: "scaleX(1)",
                 },
               }}
             >
               ¿Industria 4.0?
             </Button>
+            <Button
+              onClick={toQuiz}
+              variant="text"
+              sx={{
+                color: "white",
+                textTransform: "none",
+                position: "relative",
+                overflow: "hidden",
+                "&::after": {
+                  content: '""',
+                  position: "absolute",
+                  left: 0,
+                  bottom: 0,
+                  width: "100%",
+                  height: "2px",
+                  backgroundColor: "#2E8B57",
+                  transform: "scaleX(0)",
+                  transformOrigin: "left",
+                  transition: "transform 0.3s ease-in-out",
+                },
+                "&:hover::after": {
+                  transform: "scaleX(1)",
+                },
+              }}
+            >
+              Cuestionario
+            </Button>
 
-            <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
-              {isAuthenticated ? (
-                <Button
-                  onClick={handleLogout}
-                  variant="outlined"
-                  sx={{ color: "white", textTransform: "none", borderColor: "white" }}
-                >
-                  Cerrar Sesión
-                </Button>
-              ) : (
-                <Button
-                  onClick={toLogin}
-                  variant="outlined"
-                  sx={{ color: "white", textTransform: "none", borderColor: "white" }}
-                >
-                  Iniciar Sesión
-                </Button>
-              )}
-            </Box>
+            {/* BOTÓN ARTÍCULOS - SOLO VISIBLE SI está autenticado */}
+            {isAuthenticated && (
+              <Button
+                onClick={toArticulos}
+                variant="text"
+                sx={{
+                  color: "white",
+                  textTransform: "none",
+                  position: "relative",
+                  overflow: "hidden",
+                  "&::after": {
+                    content: '""',
+                    position: "absolute",
+                    left: 0,
+                    bottom: 0,
+                    width: "100%",
+                    height: "2px",
+                    backgroundColor: "#2E8B57",
+                    transform: "scaleX(0)",
+                    transformOrigin: "left",
+                    transition: "transform 0.3s ease-in-out",
+                  },
+                  "&:hover::after": {
+                    transform: "scaleX(1)",
+                  },
+                }}
+              >
+                Artículos
+              </Button>
+            )}
+            
+            {/* Botón de Cerrar Sesión o Iniciar Sesión */}
+            {isAuthenticated ? (
+              <Button
+                onClick={handleLogout}
+                variant="outlined"
+                sx={{ color: "white", textTransform: "none", borderColor: "white" }}
+              >
+                Cerrar Sesión
+              </Button>
+            ) : (
+              <Button
+                onClick={toLogin}
+                variant="outlined"
+                sx={{ color: "white", textTransform: "none", borderColor: "white" }}
+              >
+                Iniciar Sesión
+              </Button>
+            )}
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
