@@ -25,18 +25,20 @@ const investigadorData = [
   {
     nombre: "Marcelo López Trujillo",
     perfilImg: MarceloLopez,
-    linkedin: "https://www.linkedin.com/in/marcelo-lopez-trujillo-76114125/"
+    linkedin: "https://www.linkedin.com/in/marcelo-lopez-trujillo-76114125/",
+    informacion: "Profesor Titular de Universidad de Caldas - Catedrático de Universidad Nacional de Colombia"
   },
   {
     nombre: "Alexandra Eugenia Duarte",
     perfilImg: AlexandraDuarte,
-    linkedin: "https://www.linkedin.com/in/ph-d-alexandra-duarte-0a992724/"
+    linkedin: "https://www.linkedin.com/in/ph-d-alexandra-duarte-0a992724/",
+    informacion: "Ph.D-Docente Universidad de Caldas"
   },
   {
     nombre: "Carlos Eduardo Marulanda",
     perfilImg: CarlosMarulanda,
-
-    linkedin: "https://co.linkedin.com/in/carlos-marulanda-2018"
+    linkedin: "https://co.linkedin.com/in/carlos-marulanda-2018",
+    informacion:"Profesor Universidad de Caldas"
   },
   {
     nombre: "Santiago Murillo Rendón",
@@ -162,11 +164,11 @@ export default function About() {
             el que requiere la convergencia entre el entorno físico y el digital, lo que exige una transformación radical en la industria
             manufacturera. Este desafío de transformación no solo impacta en los procedimientos operativos, sino también en las personas y
             en la nueva forma de trabajar en un mundo donde los datos se han convertido en la materia prima principal, en lugar de los materiales
-            tradicionales utilizados en la fabricación de productos. En Colombia, según estudios revisados, la presencia de la Industria 4.0 
+            tradicionales utilizados en la fabricación de productos. En Colombia, según estudios revisados, la presencia de la Industria 4.0
             está en proceso de crecimiento y en el sector de alimentos es incipiente, lo que hace relevante adoptar las innovaciones tecnológicas,
-            detallando las herramientas disponibles.Para el efecto, desde un tipo de investigación cualitativa, a través de un estudio descriptivo, 
+            detallando las herramientas disponibles.Para el efecto, desde un tipo de investigación cualitativa, a través de un estudio descriptivo,
             exploratorio, explicativo y correlacional, se definirán estrategias para la fábrica inteligente en las empresas medianas del sector
-             de alimentos del Departamento de Caldas Colombia y se desarrollará una aplicación de software que permita dar inicio a un observatorio institucional del tema.
+            de alimentos del Departamento de Caldas Colombia y se desarrollará una aplicación de software que permita dar inicio a un observatorio institucional del tema.
 
           </Typography>
 
@@ -203,7 +205,7 @@ export default function About() {
                         </IconButton>
                       </Box>
                       <Typography variant="body2" sx={{ textAlign: "justify" }}>
-                        Información adicional sobre {investigador.nombre}.
+                        {investigador.informacion}
                       </Typography>
                     </Box>
                   </Grid>
