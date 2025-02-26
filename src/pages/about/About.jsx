@@ -15,27 +15,27 @@ import { LinkedIn } from "@mui/icons-material";
 import Logo from "../../assets/images/Logo Verde.png";
 import NavBar from "/src/pages/home/components/AppBar.jsx";
 import Footer from "/src/pages/home/components/Footer.jsx"
-
+import MarceloLopez from "../../assets/images/MarceloLopezTrujillo.jpg";
+import AlexandraDuarte from "../../assets/images/AlexandraDuarte.jpg";
+import CarlosMarulanda from "../../assets/images/CarlosMarulanda.jpg";
 import perfil2 from "../../assets/images/perfil2.webp";
 
 // Datos de ejemplo
 const investigadorData = [
   {
     nombre: "Marcelo López Trujillo",
-    perfilImg:
-      "https://media.licdn.com/dms/image/v2/C4E03AQEKcWQFU15LdA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1548725555869?e=1738800000&v=beta&t=2hZvzKF64h1Nuh3waUmhsOQ7f8pJdDXJQIS8CEVD0LQ",
+    perfilImg: MarceloLopez,
     linkedin: "https://www.linkedin.com/in/marcelo-lopez-trujillo-76114125/"
   },
   {
     nombre: "Alexandra Eugenia Duarte",
-    perfilImg:
-      "https://media.licdn.com/dms/image/v2/D4E03AQEHwSrAvrMnhg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1724078772464?e=1738800000&v=beta&t=SdUX8ohIwaOt9fLqrLPk64oxqkqw5jZysqWbRPfV56w",
-    linkedin: "https://www.linkedin.com/in/ana-rodriguez/"
+    perfilImg: AlexandraDuarte,
+    linkedin: "https://www.linkedin.com/in/ph-d-alexandra-duarte-0a992724/"
   },
   {
     nombre: "Carlos Eduardo Marulanda",
-    perfilImg:
-      "https://media.licdn.com/dms/image/v2/C5603AQGsTuRXri0yKw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1532127732301?e=1738800000&v=beta&t=-W2eqL_jI6pRahwWwdBM_qStLbSObkZZV8xNsFXSxso",
+    perfilImg: CarlosMarulanda,
+
     linkedin: "https://co.linkedin.com/in/carlos-marulanda-2018"
   },
   {
@@ -157,31 +157,19 @@ export default function About() {
             />
           </Box>
 
-          <Typography variant="body1" paragraph sx={{ textAlign: "justify",  fontFamily:"Times New Roman" , fontSize: 24, }}>
-            La industria 4.0 ya es una realidad mundial y nacional y tiene
-            desafíos para integrarse al entorno de producción actual, el que
-            requiere la convergencia entre el entorno físico y el digital, lo
-            que exige una transformación radical en la industria manufacturera.
+          <Typography variant="body1" paragraph sx={{ textAlign: "justify", fontFamily: "Times New Roman", fontSize: 24, }}>
+            La industria 4.0 ya es una realidad mundial y nacional y tiene desafíos para integrarse al entorno de producción actual,
+            el que requiere la convergencia entre el entorno físico y el digital, lo que exige una transformación radical en la industria
+            manufacturera. Este desafío de transformación no solo impacta en los procedimientos operativos, sino también en las personas y
+            en la nueva forma de trabajar en un mundo donde los datos se han convertido en la materia prima principal, en lugar de los materiales
+            tradicionales utilizados en la fabricación de productos. En Colombia, según estudios revisados, la presencia de la Industria 4.0 
+            está en proceso de crecimiento y en el sector de alimentos es incipiente, lo que hace relevante adoptar las innovaciones tecnológicas,
+            detallando las herramientas disponibles.Para el efecto, desde un tipo de investigación cualitativa, a través de un estudio descriptivo, 
+            exploratorio, explicativo y correlacional, se definirán estrategias para la fábrica inteligente en las empresas medianas del sector
+             de alimentos del Departamento de Caldas Colombia y se desarrollará una aplicación de software que permita dar inicio a un observatorio institucional del tema.
+
           </Typography>
-          <Typography variant="body1" paragraph sx={{ textAlign: "justify", fontFamily:"Times New Roman" , fontSize: 24}}>
-            Este desafío de transformación no solo impacta en los procedimientos
-            operativos, sino también en las personas y en la nueva forma de
-            trabajar en un mundo donde los datos se han convertido en la materia
-            prima principal, en lugar de los materiales tradicionales utilizados
-            en la fabricación de productos.
-          </Typography>
-          <Typography variant="body1" paragraph sx={{ textAlign: "justify",fontFamily:"Times New Roman", fontSize: 24 }}>
-            En Colombia, según estudios revisados, la presencia de la Industria
-            4.0 está en proceso de crecimiento y en el sector de alimentos es
-            incipiente, lo que hace relevante adoptar las innovaciones
-            tecnológicas, detallando las herramientas disponibles. Para el
-            efecto, desde un tipo de investigación cualitativa, a través de un
-            estudio descriptivo, exploratorio, explicativo y correlacional, se
-            definirán estrategias para la fábrica inteligente en las empresas
-            medianas del sector de alimentos del Departamento de Caldas Colombia
-            y se desarrollará una aplicación de software que permita dar inicio
-            a un observatorio institucional del tema.
-          </Typography>
+
         </TabPanel>
 
         {/* Tab 1: Líderes */}
@@ -238,9 +226,9 @@ export default function About() {
             ))}
           </Grid>
         </TabPanel>
-        
+
       </Container>
-      <Footer/>
+      <Footer />
     </BackgroundContainer>
 
   );
