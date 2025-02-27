@@ -22,14 +22,15 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
-          <Route path='/About' element= {<About/>}/>
-          <Route path='/Information' element= {<Info/>}/>
+          <Route path='/about' element= {<About/>}/>
+          <Route path='/information' element= {<Info/>}/>
+          <Route path='/quiz' index element={<Quiz/>}/>
           <Route path="/article/:id" element={<View />}/>
           <Route path="/" element={<PrivateRoute />}>
           <Route path='/New-article'  index element= {<NewArticle/>}/>
           <Route path='/dashboard'  index element= {<Manage/>}/>
           <Route path='/Edit-article/:id'  index element= {<EditArticle/>}/>
-          <Route path='/Quiz' index element={<Quiz/>}/>
+          
 
           </Route>
         </Routes>
