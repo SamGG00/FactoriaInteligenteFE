@@ -64,7 +64,7 @@ export default function Home() {
   const fetchArticles = async () => {
     try {
       const response = await axios.get(
-        `${API_URL}/article/articles`,
+        `${API_URL}/article/articles/1`,
         { withCredentials: true }
       );
       console.log("Artículos recibidos:", response.data.articles);
