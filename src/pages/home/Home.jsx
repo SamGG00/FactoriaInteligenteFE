@@ -60,11 +60,11 @@ export default function Home() {
     fetchArticles();
   }, []);
 
-  // Llama a la API tal como en "Manage"
+
   const fetchArticles = async () => {
     try {
       const response = await axios.get(
-        "${API_URL}/article/articles",
+        `${API_URL}/article/articles`,
         { withCredentials: true }
       );
       console.log("Artículos recibidos:", response.data.articles);
