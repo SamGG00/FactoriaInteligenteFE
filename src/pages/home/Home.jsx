@@ -308,7 +308,7 @@ export default function Home() {
                           <Button
                             variant="contained"
                             onClick={() =>
-                              navigate(`/article/${article.id}`)
+                              navigate(`/article/${article.id_articulo}`)
                             }
                           >
                             Ver más
