@@ -13,7 +13,7 @@ export default function Manage() {
   const [page, setPage] = useState(1);
   const [alertOpen, setAlertOpen] = useState(false);
 
-  const url = "http://localhost:3000/article/articles?page=";
+  const url = `${API_URL}/article/articles?page=`;
 
   const nav = useNavigate();
 
@@ -38,7 +38,7 @@ export default function Manage() {
   const deleteArticle = async (articleId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/article/article/${articleId}`,
+        `${API_URL}/article/article/${articleId}`,
         {
           withCredentials: true, // Incluye las cookies si es necesario
         }

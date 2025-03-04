@@ -52,7 +52,7 @@ export default function Login() {
   const [captchaValue, setCaptchaValue] = useState(null);
 
   // URL de ejemplo; ajusta según tu backend
-  const url = "http://localhost:3000/auth/login";
+  const url = `${API_URL}/auth/login`;
   const nav = useNavigate();
 
   // Si usas Context para manejar usuario, descomenta e importa tu contexto

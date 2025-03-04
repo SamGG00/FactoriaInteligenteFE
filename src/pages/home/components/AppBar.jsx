@@ -17,6 +17,7 @@ import Logo from "../../../assets/images/Logo Verde.png";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const Search = styled("div")(({ theme, open }) => ({
   display: "flex",
@@ -74,7 +75,7 @@ export default function NavBar() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/auth/validateToken", {
+        const response = await axios.get(`${API_URL}/auth/validateToken`, {
           withCredentials: true, // Incluye las cookies
         });
         if (response.data.status) {
@@ -90,7 +91,7 @@ export default function NavBar() {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:3000/auth/logout", {}, { withCredentials: true });
+      await axios.post(`${API_URL}/auth/logout`, {}, { withCredentials: true });
       setIsAuthenticated(false);
       navigate("/");
     } catch (error) {

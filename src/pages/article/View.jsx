@@ -6,6 +6,8 @@ import Grid from "@mui/material/Grid2";
 import NavBar from "../home/components/AppBar";
 import { Button, Box } from "@mui/material";
 import "./view.css";
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function View() {
   const { id } = useParams();
   const [article, setArticle] = useState(null);
@@ -14,15 +16,14 @@ export default function View() {
   }, [id]);
 
   const getArticles = async (idArticle) => {
-    const response = await axios.get(
-      `http://localhost:3000/article/${idArticle}`
-    );
+    const response = await axios.get(`${API_URL}/article/${idArticle}`);
     if (!response.data.status) {
       alert("Error al cargar el artículo");
       return;
     }
     setArticle(response.data.article);
   };
+  
 
   const capitalizeFirstLetter = (text) => {
     return text.charAt(0).toUpperCase() + text.slice(1);
@@ -58,7 +59,7 @@ export default function View() {
                     }}
                   >
                     <img
-                      src={`http://localhost:3000/uploads/${article.campo1}`}
+                      src={`${API_URL}/uploads/${article.campo1}`} 
                       alt={article.title}
                       style={{
                         maxWidth: "700px",

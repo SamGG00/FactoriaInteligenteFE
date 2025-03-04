@@ -53,7 +53,7 @@ const EditArticle = () => {
   const getArticletoEdit = async (id) =>{
 
     const response = await axios.get(
-      `http://localhost:3000/article/${id}`,
+      `${API_URL}/article/${id}`,
       { withCredentials: true } // Asegúrate de que las cookies se envíen
     );
     if (!response.data.status) {
@@ -67,7 +67,7 @@ const EditArticle = () => {
     const newFields = Object.keys(data).filter(key => key.startsWith("campo")).map((key, index) => {
       const value = data[key];
       if (typeof value === "string" && value.includes("hvj_bp_")) {
-        const imageUrl = `http://localhost:3000/uploads/${value}`;
+        const imageUrl = `${API_URL}/uploads/${value}`;
         return { type: 2, value:imageUrl, preview:imageUrl  }; // Es una imagen
       } else {
         return { type: 1, value }; // Es un texto
@@ -117,7 +117,7 @@ const EditArticle = () => {
     });
 
     try {
-      const route =`http://localhost:3000/article/article/${id}`
+      const route =`${API_URL}/article/article/${id}`
       console.log("ruta",route)
       const response = await axios.put( route,
         formData,

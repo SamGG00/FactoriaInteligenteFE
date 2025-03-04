@@ -5,7 +5,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
-
+const API_URL = import.meta.env.VITE_API_URL;
 import NavBar from "./components/AppBar";
 import Footer from "./components/Footer";
 
@@ -23,7 +23,7 @@ function getFirstImage(article) {
     console.log(campo)
     // Si ese campo existe y empieza con "hvj_bp_", asumimos que es nombre de archivo de imagen
     if (campo && campo.startsWith("hvj_bp_")) {
-      return `http://localhost:3000/uploads/${campo}`;
+      return `${API_URL}/uploads/${campo}`;
     }
   }
   // Si no encontró ninguna imagen en campo1..campo6, devolvemos la imagen de respaldo
@@ -64,7 +64,7 @@ export default function Home() {
   const fetchArticles = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/article/articles",
+        "${API_URL}/article/articles",
         { withCredentials: true }
       );
       console.log("Artículos recibidos:", response.data.articles);

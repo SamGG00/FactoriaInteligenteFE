@@ -16,6 +16,7 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 import axios from "axios";
 import "../../assets/css/newArticle.css";
 import { useNavigate } from "react-router-dom";
+const url = `${API_URL}/article/articles?page=`;
 import { UserContext } from "../../utils/userContext";
 /* f2H6%8sbn&5j481 user id */ 
 const ArticleEditor = () => {
@@ -81,7 +82,7 @@ const ArticleEditor = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/article/newArticle",
+        `${API_URL}/article/newArticle`,
         formData,
         {
           headers: {
