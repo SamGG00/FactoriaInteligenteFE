@@ -21,8 +21,7 @@ export default function Manage() {
   }, [page]);
 
   const getArticles = async (page = 1) => {
-    const link = url + page;
-    console.log(link);
+    const link = `${API_URL}/article/articles/${page}`;
     const response = await axios.get(link, {
       withCredentials: true, // Asegúrate de que las cookies se envíen
     });
