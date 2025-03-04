@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import {
   Box,
   Button,
@@ -18,8 +18,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 // import { UserContext } from "../../context/userContext";
 import logo from "../../assets/images/Logo Verde.png";
-import {UserContext} from "../../utils/userContext";
-
+import { UserContext } from "../../utils/userContext";
+const API_URL = import.meta.env.VITE_API_URL;
 const SignInContainer = styled(Stack)(({ theme }) => ({
   minHeight: "100vh", // Ocupa toda la ventana
   alignItems: "center",
@@ -56,12 +56,12 @@ export default function Login() {
   const nav = useNavigate();
 
   // Si usas Context para manejar usuario, descomenta e importa tu contexto
-  
+
   const {
     setUserId,
     setUser,
   } = useContext(UserContext);
-  
+
 
   const authorization = async () => {
     const data = {
@@ -69,9 +69,9 @@ export default function Login() {
       password: password,
     };
     try {
-      const response = await axios.post(url, data,{withCredentials:true});
+      const response = await axios.post(url, data, { withCredentials: true });
       const dataResponse = response;
-      console.log("response :",dataResponse)
+      console.log("response :", dataResponse)
       if (dataResponse.status) {
         // Descomenta si usas tu contexto de usuario
         setUserId(dataResponse.data.id);
@@ -129,11 +129,11 @@ export default function Login() {
   return (
     <SignInContainer>
       <StyledCard>
-         
+
         <Box display="flex" justifyContent="center">
           <img src={logo} alt="Logo" style={{ width: "35%", height: "auto" }} />
         </Box>
-        
+
         <Box
           component="form"
           onSubmit={handleSubmit}
@@ -151,7 +151,7 @@ export default function Login() {
               mb: 1,
               fontWeight: "bold",
               fontFamily: "Times New Roman, serif",
-              color:"#2E8B57",
+              color: "#2E8B57",
             }}
           >
             Inicio de sesión

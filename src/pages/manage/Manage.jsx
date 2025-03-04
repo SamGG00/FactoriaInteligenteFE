@@ -6,14 +6,13 @@ import EnhancedTable from "./components/EnhancedTable";
 import { Button, Box, Snackbar, Alert } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
-
+const API_URL = import.meta.env.VITE_API_URL;
 export default function Manage() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [alertOpen, setAlertOpen] = useState(false);
 
-  const url = `${API_URL}/article/articles?page=`;
 
   const nav = useNavigate();
 

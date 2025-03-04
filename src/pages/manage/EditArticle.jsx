@@ -18,7 +18,7 @@ import "../../assets/css/newArticle.css";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-
+const API_URL = import.meta.env.VITE_API_URL;
 const EditArticle = () => {
   
   const [fields, setFields] = useState([

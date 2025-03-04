@@ -14,6 +14,7 @@ import EditArticle from './pages/manage/EditArticle.jsx';
 import Quiz from './pages/quiz/Quiz.jsx';
 /* import NotFoundPage from './pages/notFound/NotFound' */
 /* import  {UserProvider}  from './context/userContext'; */
+
 function App() {
 
   return (

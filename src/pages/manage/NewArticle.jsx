@@ -16,7 +16,7 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 import axios from "axios";
 import "../../assets/css/newArticle.css";
 import { useNavigate } from "react-router-dom";
-const url = `${API_URL}/article/articles?page=`;
+const API_URL = import.meta.env.VITE_API_URL;
 import { UserContext } from "../../utils/userContext";
 /* f2H6%8sbn&5j481 user id */ 
 const ArticleEditor = () => {
